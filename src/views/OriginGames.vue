@@ -1,20 +1,20 @@
 <template>
 <div class="container">
   <div class="about">
-    <h1>All Games Table</h1>
-    <AllGamesTable />
+    <h1>Origin Games Table</h1>
+    <OriginGamesTable />
   </div>
 </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import AllGamesTable from '@/components/AllGamesTable.vue'
+import OriginGamesTable from '@/components/OriginGamesTable.vue'
 
 export default {
-  name: 'AllGames',
+  name: 'OriginGames',
   components: {
-    AllGamesTable
+    OriginGamesTable
   }
 }
 </script>
