@@ -31,7 +31,6 @@ export default {
   created() {
     axios.get('http://localhost:4000/ubisoft').then((resp) =>{
       this.games = resp.data.games;      
-      console.log(this.games)
     });
     
   }  

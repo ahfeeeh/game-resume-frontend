@@ -4,9 +4,7 @@
       <tr>
         <th>Idx</th>
         <th>ID</th>
-        <th>Size(GB)</th>
         <th>Title</th>
-        <th>Type</th>        
         <th>Finished ?</th>
         <th>Fisical Disc ?</th>
       </tr>
@@ -15,11 +13,9 @@
       <tr v-for="game, idx in games" :key="idx">
         <td>{{idx + 1 }}</td>
         <td>{{game.ID}}</td>
-        <td>{{game['Size(GB)']}}</td>            
-        <td>{{game.Name}}</td>      
-        <td>{{game.Type}}</td>  
-        <td>{{game.Finished}}</td>   
-        <td>{{game['Fisical Disc']}}</td>
+        <td>{{game.NAME}}</td>      
+        <td>{{game.FINISHED}}</td>   
+        <td>{{game.FISICAL_DISC}}</td>
       </tr>
     </tbody>   
 </table>
@@ -30,14 +26,14 @@
 import axios from 'axios';
 
 export default {
-  name: 'WiiGamesTable',
+  name: 'WiiUGamesTable',
   data() {
     return {
       games: []      
     }
   },
   created() {
-    axios.get('http://localhost:4000/wii').then((resp) =>{
+    axios.get('http://localhost:4000/wiiu').then((resp) =>{
       this.games = resp.data.games;      
     });
     

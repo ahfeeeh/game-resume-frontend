@@ -6,6 +6,7 @@
         <router-link to="/ubisoft">Ubisoft Games</router-link> |
         <router-link to="/steam">Steam Games</router-link> |
         <router-link to="/wii">Wii Games</router-link> |
+        <router-link to="/wiiu">WiiU Games</router-link> 
     </div>
 </template>
 

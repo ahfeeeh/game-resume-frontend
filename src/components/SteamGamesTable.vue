@@ -33,7 +33,6 @@ export default {
   created() {
     axios.get('http://localhost:4000/steam').then((resp) =>{
       this.games = resp.data.games;      
-      console.log(this.games)
     });
     
   }  
