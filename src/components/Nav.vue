@@ -5,6 +5,7 @@
         <router-link to="/origin">Origin Games</router-link> |
         <router-link to="/ubisoft">Ubisoft Games</router-link> |
         <router-link to="/steam">Steam Games</router-link> |
+        <router-link to="/wii">Wii Games</router-link> |
     </div>
 </template>
 

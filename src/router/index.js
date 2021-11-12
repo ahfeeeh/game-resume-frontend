@@ -26,6 +26,11 @@ const routes = [
     path: '/steam',
     name: 'SteamGames',
     component: () => import('../views/SteamGames.vue')
+  },
+  {
+    path: '/wii',
+    name: 'WiiGames',
+    component: () => import('../views/WiiGames.vue')
   }
 ]
 
