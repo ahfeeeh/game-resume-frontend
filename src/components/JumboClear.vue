@@ -7,14 +7,22 @@
       HTML here as we've adjusted the alignment and sizing of both column's
       content for equal-height.
     </p>
-    <button class="btn btn-outline-secondary" type="button">
+    <button class="btn btn-outline-secondary" type="button" @click="goToConsoleGames">
       See Console Games
     </button>
   </div>
 </template>
 
 <script>
+export default {
+  methods: {
+    goToConsoleGames() {
+      this.$router.push({ path: 'console' })
+    }
+  }
+}
 </script>
 
 <style scoped>
+
 </style>

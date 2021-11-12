@@ -41,6 +41,11 @@ const routes = [
     path: '/pc',
     name: 'PCGames',
     component: () => import('../views/PCGames.vue')
+  },    
+  {
+    path: '/console',
+    name: 'ConsoleGames',
+    component: () => import('../views/ConsoleGames.vue')
   }
 ]
 
