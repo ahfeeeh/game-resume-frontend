@@ -21,6 +21,11 @@ const routes = [
     path: '/ubisoft',
     name: 'UbisoftGames',
     component: () => import('../views/UbisoftGames.vue')
+  },
+  {
+    path: '/steam',
+    name: 'SteamGames',
+    component: () => import('../views/SteamGames.vue')
   }
 ]
 
