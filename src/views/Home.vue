@@ -1,18 +1,48 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container py-4">
+    <div class="home">
+      <JumboTron />
+       <div class="row align-items-md-stretch">
+          <div class="col-md-6">
+            <JumboDark />
+          </div>
+          <div class="col-md-6">
+            <JumboClear />
+          </div>
+    </div>
+
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import JumboTron from "@/components/JumboTron.vue";
+import JumboDark from "@/components/JumboDark.vue";
+import JumboClear from "@/components/JumboClear.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
+    JumboTron,
+    JumboDark,
+    JumboClear
+  },
+};
+</script>
+
+<style scoped>
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
   }
 }
-</script>
+</style>

@@ -36,6 +36,11 @@ const routes = [
     path: '/wiiu',
     name: 'WiiUGames',
     component: () => import('../views/WiiUGames.vue')
+  },    
+  {
+    path: '/pc',
+    name: 'PCGames',
+    component: () => import('../views/PCGames.vue')
   }
 ]
 

@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th>Idx</th>
-        <th>AppID</th>
+        <th>Platform</th>
         <th>Title</th>        
         <th>Finished ?</th>
       </tr>
@@ -11,7 +11,7 @@
     <tbody>  
       <tr v-for="game, idx in games" :key="idx">
         <td>{{idx + 1 }}</td>
-        <td>{{game.appid}}</td>
+        <td>{{game.platform}}</td>
         <td>{{game.name}}</td>            
         <td>{{game.finished}}</td>        
       </tr>
@@ -24,14 +24,14 @@
 import axios from 'axios';
 
 export default {
-  name: 'SteamGamesTable',
+  name: 'PCGamesTable',
   data() {
     return {
       games: []      
     }
   },
   created() {
-    axios.get('http://localhost:4000/steam').then((resp) =>{
+    axios.get('http://localhost:4000/pc').then((resp) =>{
       this.games = resp.data.games;      
     });
     
