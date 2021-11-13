@@ -46,6 +46,11 @@ const routes = [
     path: '/console',
     name: 'ConsoleGames',
     component: () => import('../views/ConsoleGames.vue')
+  },
+  {
+    path: '/sandbox',
+    name: 'SandBox',
+    component: () => import('../views/SandBox.vue')
   }
 ]
 

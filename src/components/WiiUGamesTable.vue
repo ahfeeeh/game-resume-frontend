@@ -33,6 +33,7 @@ import { useToast } from "vue-toastification";
 export default {
   name: 'WiiUGamesTable',
   setup() {
+    // https://github.com/Maronato/vue-toastification/tree/next
       // Get toast interface
       const toast = useToast();
 
