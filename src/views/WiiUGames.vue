@@ -1,5 +1,8 @@
 <template>
-<div class="container">
+<div class="container py-4" style="margin-top:50px">
+    <div class="row align-items-start">
+      <button type="button" class="btn btn-primary btn-lg btn-block">Add a new Game</button>
+    </div>
   <div class="about">
     <h1>WiiU Games Table</h1>
     <WiiUGamesTable />

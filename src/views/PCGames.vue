@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container py-4" style="margin-top:50px">
   <div class="about">
     <h1>PC Games Table</h1>
     <PCGamesTable />

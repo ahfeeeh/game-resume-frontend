@@ -28,14 +28,11 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a
-              class="nav-link active"
+              class="nav-link"
               aria-current="page"
               href="#"
               @click="goToHome">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" @click="goToAllGames">All Games</a>
-          </li>
+          </li>     
           <li class="nav-item">
             <a class="nav-link" href="#" @click="goToOriginGames">Origin Games</a>
           </li>
@@ -71,9 +68,6 @@ export default {
   methods: {
     goToHome() {
       this.$router.push({ path: "/" });
-    },
-    goToAllGames() {
-      this.$router.push({ path: "all_games" });
     },
     goToOriginGames() {
       this.$router.push({ path: "origin" });

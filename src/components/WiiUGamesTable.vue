@@ -7,6 +7,7 @@
         <th>Title</th>
         <th>Finished ?</th>
         <th>Fisical Disc ?</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>  
@@ -16,6 +17,9 @@
         <td>{{game.NAME}}</td>      
         <td><input type="checkbox" v-model="game.FINISHED" :disabled=true></td>   
         <td><input type="checkbox" v-model="game.FISICAL_DISC" :disabled=true></td>
+        <td><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+            <button type="button" class="btn btn-secondary"><i class="fas fa-trash-alt"></i> Delete</button>
+        </td>
       </tr>
     </tbody>   
 </table>

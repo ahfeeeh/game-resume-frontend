@@ -7,7 +7,7 @@
         the one in previous versions of Bootstrap. Check out the examples below
         for how you can remix and restyle it to your liking.
       </p>
-      <button class="btn btn-primary btn-lg" type="button">
+      <button class="btn btn-primary btn-lg" type="button" @click="goToAllGames">
         See All Games
       </button>
     </div>
@@ -15,6 +15,13 @@
 </template>
 
 <script>
+export default {
+  methods:{
+    goToAllGames() {
+      this.$router.push({ path: "all_games" });
+    }
+  }
+}
 </script>
 
 <style scoped>
