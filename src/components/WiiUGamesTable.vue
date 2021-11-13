@@ -17,8 +17,8 @@
         <td>{{game.NAME}}</td>      
         <td><input type="checkbox" v-model="game.FINISHED" :disabled=true></td>   
         <td><input type="checkbox" v-model="game.FISICAL_DISC" :disabled=true></td>
-        <td><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-            <button type="button" class="btn btn-secondary"><i class="fas fa-trash-alt"></i> Delete</button>
+        <td><button type="button" class="btn btn-primary" @click="buttonClick('Click on Edit')"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+            <button type="button" class="btn btn-secondary" @click="buttonClick('Click on Delete')"><i class="fas fa-trash-alt"></i> Delete</button>
         </td>
       </tr>
     </tbody>   
@@ -28,9 +28,26 @@
 <script>
 
 import axios from 'axios';
+import { useToast } from "vue-toastification";
 
 export default {
   name: 'WiiUGamesTable',
+  setup() {
+      // Get toast interface
+      const toast = useToast();
+
+      // Use it!
+      toast("I'm a toast!");
+
+      // or with options
+      toast.success("My toast content", {
+        timeout: 2000
+      });
+      // These options will override the options defined in the "app.use" plugin registration for this specific toast
+
+      // Make it available inside methods
+      return { toast }
+    },
   data() {
     return {
       games: []      
@@ -39,8 +56,17 @@ export default {
   created() {
     axios.get('http://localhost:4000/wiiu').then((resp) =>{
       this.games = resp.data.games;      
-    });
-    
+    });        
+  },mounted() {
+        // Since you returned `toast` from setup(), you can access it now
+        this.toast.info("I'm an info toast!");
+  }, 
+  methods: {
+    buttonClick(message) {
+        this.toast.success(message, {
+        timeout: 2000
+      });
+    }
   }  
 }
 </script>
