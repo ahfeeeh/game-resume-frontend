@@ -14,8 +14,9 @@
         <td>{{idx + 1 }}</td>
         <td>{{game.system}}</td>
         <td>{{game.name}}</td>            
-        <td>{{game.finished}}</td>        
-        <td>{{game.fisical_disc}}</td>
+        <td><input type="checkbox" v-model="game.finished" :disabled=true></td>        
+        <td><input type="checkbox" v-model="game.fisical_disc" :disabled=true></td>
+        
       </tr>
     </tbody>   
 </table>
@@ -43,4 +44,9 @@ export default {
 
 <style scoped>
 
+  /*Not Working*/
+  td input[type=checkbox]:checked {
+    background-color: blue !important;
+    color: blue !important;
+  }
 </style>

@@ -11,7 +11,7 @@
       <tr v-for="game, idx in games" :key="idx">
         <td>{{idx + 1 }}</td>
         <td>{{game.NAME}}</td>            
-        <td>{{game.FINISHED}}</td>        
+        <td><input type="checkbox" v-model="game.FINISHED" :disabled=true></td>        
       </tr>
     </tbody>   
 </table>

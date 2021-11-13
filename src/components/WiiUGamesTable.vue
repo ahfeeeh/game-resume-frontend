@@ -14,8 +14,8 @@
         <td>{{idx + 1 }}</td>
         <td>{{game.ID}}</td>
         <td>{{game.NAME}}</td>      
-        <td>{{game.FINISHED}}</td>   
-        <td>{{game.FISICAL_DISC}}</td>
+        <td><input type="checkbox" v-model="game.FINISHED" :disabled=true></td>   
+        <td><input type="checkbox" v-model="game.FISICAL_DISC" :disabled=true></td>
       </tr>
     </tbody>   
 </table>

@@ -13,7 +13,7 @@
         <td>{{idx + 1 }}</td>
         <td>{{game.name}}</td>    
         <td>{{game.system}}</td>
-        <td>{{game.finished}}</td>        
+        <td><input type="checkbox" v-model="game.finished" :disabled=true></td>                
       </tr>
     </tbody>   
 </table>

@@ -18,8 +18,8 @@
         <td>{{game['Size(GB)']}}</td>            
         <td>{{game.Name}}</td>      
         <td>{{game.Type}}</td>  
-        <td>{{game.Finished}}</td>   
-        <td>{{game['Fisical Disc']}}</td>
+        <td><input type="checkbox" v-model="game.Finished" :disabled=true></td>   
+        <td><input type="checkbox" v-model="game['Fisical Disc']" :disabled=true></td>
       </tr>
     </tbody>   
 </table>
