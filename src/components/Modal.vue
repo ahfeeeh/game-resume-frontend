@@ -3,10 +3,32 @@
     <div v-show="modalActive" class="modal">
       <transition name="modal-animation-inner">
         <div v-show="modalActive" class="modal-inner">
-          <i @click="close" class="far fa-times-circle"></i>
-          <!-- Modal Content -->
-          <slot />
-          <button @click="close" type="button">Close</button>
+
+          <div class="modal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">
+                      <!-- Modal Title -->
+                      <slot name="modal-header" />                    
+                    </h5>
+                    <button type="button" @click="close" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Modal Content -->
+                    <slot name="modal-content" />                    
+                  </div>
+                  <div class="modal-footer">
+                    <!-- Modal Footer --> 
+                    <slot name="modal-footer" />                                       
+                    <button @click="close" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>          
+          
         </div>
       </transition>
     </div>
@@ -73,14 +95,14 @@ export default {
 	cursor: pointer;
 }
  .modal .modal-inner i:hover {
-	color: crimson;
+	/*color: crimson;*/
 }
  .modal .modal-inner button {
-	padding: 20px 30px;
+	/*padding: 20px 30px;*/
 	border: none;
-	font-size: 16px;
-	background-color: crimson;
-	color: #fff;
+	/*font-size: 16px;*/
+	/*background-color: crimson;
+	color: #fff;*/
 	cursor: pointer;
 }
  
