@@ -17,8 +17,11 @@
         <td>{{game.NAME}}</td>      
         <td><input type="checkbox" v-model="game.FINISHED" :disabled=true></td>   
         <td><input type="checkbox" v-model="game.FISICAL_DISC" :disabled=true></td>
-        <td><button type="button" class="btn btn-primary" @click="buttonClick('Click on Edit')"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-            <button type="button" class="btn btn-secondary" @click="buttonClick('Click on Delete')"><i class="fas fa-trash-alt"></i> Delete</button>
+        <td>
+          <button type="button" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+          <button type="button" class="btn btn-primary btn-sm" @click="buttonClick('Click on Edit')"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+          <button type="button" class="btn btn-secondary btn-sm" @click="buttonClick('Click on Delete')"><i class="fas fa-trash-alt"></i> Delete</button>
+          
         </td>
       </tr>
     </tbody>   
@@ -42,7 +45,7 @@ export default {
 
       // or with options
       toast.success("My toast content", {
-        timeout: 2000
+        timeout: 4000
       });
       // These options will override the options defined in the "app.use" plugin registration for this specific toast
 
