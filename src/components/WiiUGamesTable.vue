@@ -18,7 +18,7 @@
         <td><input type="checkbox" v-model="game.FINISHED" :disabled=true></td>   
         <td><input type="checkbox" v-model="game.FISICAL_DISC" :disabled=true></td>
         <td>
-          <button type="button" class="btn btn-success btn-sm" @click="selectItem(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+          <button type="button" class="btn btn-success btn-sm" @click="finishItem(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
           <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
           <button type="button" class="btn btn-secondary btn-sm" @click="buttonClick('Click on Delete')"><i class="fas fa-trash-alt"></i> Delete</button>
           
@@ -33,20 +33,20 @@
         <template v-slot:modal-content>            
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">ID</span>
+                    <span class="input-group-text" id="basic-addon3" >ID</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="selectedItem.ID">
             </div>
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3">Title</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="selectedItem.NAME">
             </div>
             <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="selectedItem.FINISHED">
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Finished?">
@@ -55,7 +55,7 @@
             <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="selectedItem.FISICAL_DISC">
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Fisical Disc?">
@@ -82,7 +82,9 @@ export default {
 
     const toggleModal = (idx) => {
       modalActive.value = !modalActive.value;
-      console.log('selected item ' + idx)
+      if(modalActive.value){
+        console.log(idx)                   
+      }      
     };
 
 
@@ -105,7 +107,7 @@ export default {
   data() {
     return {
       games: [],
-      selectedItem: null      
+      selectedItem: {ID: "", NAME: "", FINISHED: null, FISICAL_DISC: null}      
     }
   },
   created() {
@@ -128,22 +130,21 @@ export default {
         this.toast.error("Error on Loading API");
     }); 
     },
-    selectItem(idx) {
-      console.log('item index' + idx)
-      this.selectedItem = this.games[idx];
-      console.log(this.selectedItem);
+    finishItem(idx) {
+      
+      this.selectedItem = this.games[idx];      
 
       const payload = {
         table: "wiiu",
         title: this.selectedItem.NAME,
         finished: !this.selectedItem.FINISHED
-        }
-      console.log(payload)
+        }      
       
       axios.post('http://localhost:4000/finished', payload).then((resp)=>{
-          console.log(resp)
+        if(resp){
           this.getItems();
           this.toast.success(`Success on Mark ${this.selectedItem.NAME} as ${!this.selectedItem.FINISHED ? 'Finished': 'Unfinished'} `)
+        }         
       }).catch((rej) => {
       console.log(rej)
         this.toast.error("Error on Save Changes on API");
