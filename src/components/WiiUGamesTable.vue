@@ -20,8 +20,7 @@
         <td>
           <button type="button" class="btn btn-success btn-sm" @click="finishItem(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
           <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-          <button type="button" class="btn btn-secondary btn-sm" @click="buttonClick('Click on Delete')"><i class="fas fa-trash-alt"></i> Delete</button>
-          
+          <button type="button" class="btn btn-secondary btn-sm" @click="deleteItem(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
         </td>
       </tr>
     </tbody>   
@@ -83,7 +82,7 @@ export default {
     const toggleModal = (idx) => {
       modalActive.value = !modalActive.value;
       if(modalActive.value){
-        console.log(idx)                   
+        console.log(idx)                           
       }      
     };
 
@@ -149,6 +148,28 @@ export default {
       console.log(rej)
         this.toast.error("Error on Save Changes on API");
     }); 
+
+    },
+    deleteItem(idx) {
+
+      this.selectedItem = this.games[idx];      
+
+      const payload = {
+        table: "wiiu",
+        title: this.selectedItem.NAME        
+        }    
+
+      axios.delete('http://localhost:4000/remove', { data: payload }).then((resp)=>{        
+        if(resp){
+          this.getItems();
+          this.toast.success(`Success on Remove ${this.selectedItem.NAME} from Database`)
+        }         
+      }).catch((rej) => {        
+      console.log(rej)
+        this.toast.error("Error on Remove Data API");
+    }); 
+
+
 
     }
   },
