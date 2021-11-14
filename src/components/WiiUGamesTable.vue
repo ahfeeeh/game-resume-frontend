@@ -18,8 +18,8 @@
         <td><input type="checkbox" v-model="game.FINISHED" :disabled=true></td>   
         <td><input type="checkbox" v-model="game.FISICAL_DISC" :disabled=true></td>
         <td>
-          <button type="button" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
-          <button type="button" class="btn btn-primary btn-sm" @click="toggleModal"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+          <button type="button" class="btn btn-success btn-sm" @click="selectItem(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+          <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
           <button type="button" class="btn btn-secondary btn-sm" @click="buttonClick('Click on Delete')"><i class="fas fa-trash-alt"></i> Delete</button>
           
         </td>
@@ -80,8 +80,9 @@ export default {
 
     const modalActive = ref(false);
 
-    const toggleModal = () => {
+    const toggleModal = (idx) => {
       modalActive.value = !modalActive.value;
+      console.log('selected item ' + idx)
     };
 
 
@@ -90,12 +91,12 @@ export default {
       const toast = useToast();
 
       // Use it!
-      toast("I'm a toast!");
+      // toast("I'm a toast!");
 
       // or with options
-      toast.success("My toast content", {
+      /*toast.success("My toast content", {
         timeout: 4000
-      });
+      });*/
       // These options will override the options defined in the "app.use" plugin registration for this specific toast
 
       // Make it available inside methods
@@ -103,22 +104,51 @@ export default {
     },
   data() {
     return {
-      games: []      
+      games: [],
+      selectedItem: null      
     }
   },
   created() {
-    axios.get('http://localhost:4000/wiiu').then((resp) =>{
-      this.games = resp.data.games;      
-    });        
+      this.getItems();  
   },mounted() {
         // Since you returned `toast` from setup(), you can access it now
-        this.toast.info("I'm an info toast!");
+        // this.toast.info("I'm an info toast!");
   }, 
   methods: {
     buttonClick(message) {
         this.toast.success(message, {
         timeout: 2000
       });
+    },
+    getItems(){
+      axios.get('http://localhost:4000/wiiu').then((resp) =>{
+      this.games = resp.data.games;      
+    }).catch((rej) => {
+      console.log(rej)
+        this.toast.error("Error on Loading API");
+    }); 
+    },
+    selectItem(idx) {
+      console.log('item index' + idx)
+      this.selectedItem = this.games[idx];
+      console.log(this.selectedItem);
+
+      const payload = {
+        table: "wiiu",
+        title: this.selectedItem.NAME,
+        finished: !this.selectedItem.FINISHED
+        }
+      console.log(payload)
+      
+      axios.post('http://localhost:4000/finished', payload).then((resp)=>{
+          console.log(resp)
+          this.getItems();
+          this.toast.success(`Success on Mark ${this.selectedItem.NAME} as ${!this.selectedItem.FINISHED ? 'Finished': 'Unfinished'} `)
+      }).catch((rej) => {
+      console.log(rej)
+        this.toast.error("Error on Save Changes on API");
+    }); 
+
     }
   },
   components: {
