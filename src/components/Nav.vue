@@ -30,23 +30,23 @@
             <a
               class="nav-link"
               aria-current="page"
-              href="#"
+              style="cursor:pointer"
               @click="goToHome">Home</a>
           </li>     
           <li class="nav-item">
-            <a class="nav-link" href="#" @click="goToOriginGames">Origin Games</a>
+            <a class="nav-link" style="cursor:pointer" @click="goToOriginGames">Origin Games</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" @click="goToUbisoftGames">Ubisoft Games</a>
+            <a class="nav-link" style="cursor:pointer" @click="goToUbisoftGames">Ubisoft Games</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" @click="goToSteamGames">Steam Games</a>
+            <a class="nav-link" style="cursor:pointer" @click="goToSteamGames">Steam Games</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" @click="goToWiiGames">Wii Games</a>
+            <a class="nav-link" style="cursor:pointer" @click="goToWiiGames">Wii Games</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" @click="goToWiiUGames">WiiU Games</a>
+            <a class="nav-link" style="cursor:pointer" @click="goToWiiUGames">WiiU Games</a>
           </li>
         </ul>
         <form class="d-flex">
