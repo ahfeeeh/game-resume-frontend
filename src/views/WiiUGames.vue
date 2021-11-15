@@ -5,7 +5,7 @@
     </div>
   <div class="about">
     <h1>WiiU Games Table</h1>
-    <WiiUGamesTable :key="reload"/>
+    <WiiUGamesTable />
     <Modal @close="toggleModal" :modalActive="modalActive">
         <template v-slot:modal-header>
             Add a New Game
