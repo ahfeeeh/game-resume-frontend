@@ -152,11 +152,6 @@ export default {
     this.getItems();        
   }, 
   methods: {
-    buttonClick(message) {
-        this.toast.success(message, {
-        timeout: 2000
-      });
-    },
     getItems(){
       this.store.dispatch('getGames', { payload:{table: 'wiiu'}, toast: this.toast })
     },

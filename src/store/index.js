@@ -21,7 +21,7 @@ export default createStore({
       console.log('getGames Payload');
       console.log(payload);     
 
-      axios.get('http://localhost:4000/wiiu').then((resp) =>{
+      axios.get(`http://localhost:4000/${payload.table}`).then((resp) =>{        
       context.commit("SAVE_GAMES", resp.data.games);        
       toast.success('Data Loaded Successfully', { timeout: 2000 });
     }).catch((rej) => {
@@ -36,11 +36,22 @@ export default createStore({
       console.log('finishGame Payload');
       console.log(payload);  
 
-      const api_payload = {
-        table: payload.table,
-        title: context.state.selectedItem.NAME,
-        finished: !context.state.selectedItem.FINISHED
-        }      
+      let api_payload;
+      if (payload.table === 'wiiu'){
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.NAME,
+          finished: !context.state.selectedItem.FINISHED
+          }      
+      } else if (payload.table === 'wii') {
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.Name,
+          finished: !context.state.selectedItem.Finished
+          }      
+      }
+
+      
       
       axios.post('http://localhost:4000/finished', api_payload).then((resp)=>{
         if(resp){
@@ -57,11 +68,20 @@ export default createStore({
       
       console.log('deleteGame Payload');
       console.log(payload);
-      
-      const api_payload = {
-        table: payload.table,
-        title: context.state.selectedItem.NAME        
-        }    
+
+      let api_payload;
+
+      if(payload.table === 'wiiu'){
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.NAME        
+          }    
+      } else if (payload.table === 'wii'){
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.Name        
+          }    
+      }      
 
       axios.delete('http://localhost:4000/remove', { data: api_payload }).then((resp)=>{        
         if(resp){
@@ -79,14 +99,29 @@ export default createStore({
       console.log('updateGame Payload');
       console.log(payload);
 
-      const api_payload = {
-        idx: payload.IDX,
-        id: payload.ID,
-        title: payload.NAME,
-        finished: payload.FINISHED,
-        fisical_disc: payload.FISICAL_DISC,
-        table: payload.table
+      let api_payload;
+
+      if(payload.table === 'wiiu'){
+        api_payload = {
+          idx: payload.IDX,
+          id: payload.ID,
+          title: payload.NAME,
+          finished: payload.FINISHED,
+          fisical_disc: payload.FISICAL_DISC,
+          table: payload.table
+        }
+      } else if (payload.table === 'wii') {        
+        api_payload = {
+          idx: payload.IDX,
+          id: payload.ID,
+          title: payload.Name,
+          finished: payload.Finished,
+          fisical_disc: payload['Fisical Disc'],
+          table: payload.table
+        }
       }
+
+      
 
       axios.put('http://localhost:4000/update', api_payload).then((resp)=>{
         if(resp){
