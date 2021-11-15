@@ -56,6 +56,7 @@ import Modal from "@/components/Modal.vue";
 import { ref } from "vue";
 import axios from 'axios';
 import { useToast } from "vue-toastification";
+import { useStore } from 'vuex';
 
 export default {
   name: 'WiiUGames',
@@ -64,6 +65,8 @@ export default {
     Modal    
   },
   setup() {
+    const store = useStore();
+
     const modalActive = ref(false);
 
     const toggleModal = () => {
@@ -72,7 +75,7 @@ export default {
 
      const toast = useToast();
 
-    return { modalActive, toggleModal, toast };
+    return { modalActive, toggleModal, toast, store };
   },
   data() {
     return {
@@ -81,8 +84,7 @@ export default {
     }
   },
   methods: {
-    saveGame(payload) {
-      console.log(payload);
+    saveGame(payload) {      
 
           axios.post('http://localhost:4000/create', payload).then((resp)=>{
         if(resp){          

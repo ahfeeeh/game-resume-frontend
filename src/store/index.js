@@ -10,8 +10,6 @@ export default createStore({
       state.games = payload;
     },
     SELECT_ITEM(state, payload){
-      console.log("STATE / PAYLOAD")
-      console.log(state,payload)
       state.selectedItem = state.games[payload];
     }
   },

@@ -61,7 +61,7 @@
             </div>
         </template>
         <template v-slot:modal-footer>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" @click="editItem(this.store.state.selectedItem)">Save changes</button>
         </template>
     </Modal>  
 </template>
@@ -86,42 +86,23 @@ export default {
       modalActive.value = !modalActive.value;
       if(modalActive.value){
         console.log(idx)    
-        store.commit("SELECT_ITEM", idx);
-        // this.selectedItem = store.state.selectedItem
+        store.commit("SELECT_ITEM", idx);        
       }      
     };
-
-
-      // https://github.com/Maronato/vue-toastification/tree/next
-      // Get toast interface
+     
       const toast = useToast();
 
-      // Use it!
-      // toast("I'm a toast!");
-
-      // or with options
-      /*toast.success("My toast content", {
-        timeout: 4000
-      });*/
-      // These options will override the options defined in the "app.use" plugin registration for this specific toast
-
-      // Make it available inside methods
-      // games_store: computed(() => store.state.games)
       return { toast, modalActive, toggleModal, store }
     },
   data() {
     return {
       games: [],
-      selectedItem: {ID: "", NAME: "", FINISHED: null, FISICAL_DISC: null}      
+      // selectedItem: {ID: "", NAME: "", FINISHED: null, FISICAL_DISC: null}      
     }
   },
   created() {
-        
   },mounted() {
-    this.getItems();
-        // Since you returned `toast` from setup(), you can access it now
-        // this.toast.info("I'm an info toast!");
-        
+    this.getItems();        
   }, 
   methods: {
     buttonClick(message) {
@@ -138,20 +119,19 @@ export default {
         this.toast.error("Error on Loading API");
     }); 
     },
-    finishItem(idx) {
-      
-      this.selectedItem = this.games[idx];      
+    finishItem(idx) {      
+      this.store.commit('SELECT_ITEM', idx);      
 
       const payload = {
         table: "wiiu",
-        title: this.selectedItem.NAME,
-        finished: !this.selectedItem.FINISHED
+        title: this.store.state.selectedItem.NAME,
+        finished: !this.store.state.selectedItem.FINISHED
         }      
       
       axios.post('http://localhost:4000/finished', payload).then((resp)=>{
         if(resp){
           this.getItems();
-          this.toast.success(`Success on Mark ${this.selectedItem.NAME} as ${!this.selectedItem.FINISHED ? 'Finished': 'Unfinished'} `)
+          this.toast.success(`Success on Mark ${this.store.state.selectedItem.NAME} as ${!this.store.state.selectedItem.FINISHED ? 'Finished': 'Unfinished'} `)
         }         
       }).catch((rej) => {
       console.log(rej)
@@ -160,18 +140,17 @@ export default {
 
     },
     deleteItem(idx) {
-
-      this.selectedItem = this.games[idx];      
+      this.store.commit('SELECT_ITEM', idx);        
 
       const payload = {
         table: "wiiu",
-        title: this.selectedItem.NAME        
+        title: this.store.state.selectedItem.NAME        
         }    
 
       axios.delete('http://localhost:4000/remove', { data: payload }).then((resp)=>{        
         if(resp){
           this.getItems();
-          this.toast.success(`Success on Remove ${this.selectedItem.NAME} from Database`)
+          this.toast.success(`Success on Remove ${this.store.state.selectedItem.NAME} from Database`)
         }         
       }).catch((rej) => {        
       console.log(rej)
@@ -180,6 +159,11 @@ export default {
 
 
 
+    },editItem(payload) {
+      // TODO send to Backend
+      // TODO Dismiss Modal
+      // TODO show Toast Messages
+      console.log(payload);
     }
   },
   components: {
