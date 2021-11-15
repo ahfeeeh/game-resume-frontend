@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>  
-      <tr v-for="game, idx in games" :key="idx">
+      <tr v-for="game, idx in getGames" :key="idx">
         <td>{{idx + 1 }}</td>
         <td>{{game.ID}}</td>
         <td>{{game.NAME}}</td>      
@@ -95,11 +95,7 @@ export default {
 
       return { toast, modalActive, toggleModal, store }
     },
-  data() {
-    return {
-      games: []      
-    }
-  },
+  data() { return {} },
   computed: mapGetters(['getGames', 'getSelectedGame']),
   created() {},
   mounted() {
@@ -113,8 +109,7 @@ export default {
     },
     getItems(){
       axios.get('http://localhost:4000/wiiu').then((resp) =>{
-      this.games = resp.data.games;
-      this.store.commit("SAVE_GAMES", this.games);        
+      this.store.commit("SAVE_GAMES", resp.data.games);        
     }).catch((rej) => {
       console.log(rej)
         this.toast.error("Error on Loading API");
@@ -164,7 +159,28 @@ export default {
       // TODO send to Backend
       // TODO Dismiss Modal
       // TODO show Toast Messages
-      console.log(payload);
+      const api_payload = {
+        idx: payload.IDX,
+        id: payload.ID,
+        title: payload.NAME,
+        finished: payload.FINISHED,
+        fisical_disc: payload.FISICAL_DISC,
+        table: 'wiiu'
+      }
+      
+        axios.put('http://localhost:4000/update', api_payload).then((resp)=>{
+        if(resp){
+          this.getItems();
+          this.toggleModal();
+          this.toast.success(`Success on Update ${this.getSelectedGame.NAME}`)
+        }         
+      }).catch((rej) => {
+      console.log(rej)
+        this.toast.error("Error on Save Changes on API");
+    }); 
+
+
+
     }
   },
   components: {
