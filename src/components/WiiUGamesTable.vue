@@ -18,9 +18,9 @@
         <td><input type="checkbox" v-model="game.FINISHED" :disabled=true></td>   
         <td><input type="checkbox" v-model="game.FISICAL_DISC" :disabled=true></td>
         <td>
-          <button type="button" class="btn btn-success btn-sm" @click="finishItem(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+          <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
           <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-          <button type="button" class="btn btn-secondary btn-sm" @click="deleteItem(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
+          <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
         </td>
       </tr>
     </tbody>   
@@ -63,6 +63,36 @@
         <template v-slot:modal-footer>
             <button type="button" class="btn btn-primary" @click="editItem(getSelectedGame)">Save changes</button>
         </template>
+    </Modal>
+    <Modal @close="toggleModalDelete" :modalActive="modalActiveDelete">
+        <template v-slot:modal-header>
+            Delete a Game
+        </template>
+      
+       
+        <template v-slot:modal-content>            
+            <h2>Are you sure you want to remove this game?</h2>
+        </template>
+      
+
+        <template v-slot:modal-footer>
+            <button type="button" class="btn btn-primary" @click="deleteItem(getCurrentIdx, toggleModalDelete)">Delete Game</button>
+        </template>
+    </Modal>
+        <Modal @close="toggleModalFinished" :modalActive="modalActiveFinished">
+        <template v-slot:modal-header>
+            Mark Game as Finished
+        </template>
+      
+       
+        <template v-slot:modal-content>            
+            <h2>Are you sure you want to mark this game as finished?</h2>
+        </template>
+      
+
+        <template v-slot:modal-footer>
+            <button type="button" class="btn btn-primary" @click="finishItem(getCurrentIdx, toggleModalFinished)">Mark as Finished</button>
+        </template>
     </Modal>  
 </template>
 
@@ -78,9 +108,11 @@ export default {
   name: 'WiiUGamesTable',
   setup() {
 
-    const store = useStore();
+    const store = useStore();    
 
     const modalActive = ref(false);
+    const modalActiveDelete = ref(false);
+    const modalActiveFinished = ref(false);
 
     const toggleModal = (idx) => {
       modalActive.value = !modalActive.value;
@@ -89,13 +121,32 @@ export default {
         store.commit("SELECT_ITEM", idx);        
       }      
     };
+
+     const toggleModalDelete = (idx) => {
+      modalActiveDelete.value = !modalActiveDelete.value;      
+      if(modalActiveDelete.value){
+        console.log('are you sure Delete ? ', idx)
+        store.commit("SELECT_ITEM", idx);        
+      } 
+    };
+
+    const toggleModalFinished = (idx) => {
+      modalActiveFinished.value = !modalActiveFinished.value;      
+       if(modalActiveFinished.value){
+        console.log('are you sure Finished ? ', idx)
+        store.commit("SELECT_ITEM", idx);        
+      } 
+    };
      
       const toast = useToast();
 
-      return { toast, modalActive, toggleModal, store }
+      return { toast, 
+      modalActive, toggleModal, 
+      modalActiveDelete,modalActiveFinished, 
+      toggleModalDelete,toggleModalFinished, store }
     },
   data() { return {} },
-  computed: mapGetters(['getGames', 'getSelectedGame']),
+  computed: mapGetters(['getGames', 'getSelectedGame', 'getCurrentIdx']),
   created() {},
   mounted() {
     this.getItems();        
@@ -109,11 +160,13 @@ export default {
     getItems(){
       this.store.dispatch('getGames', { payload:{table: 'wiiu'}, toast: this.toast })
     },
-    finishItem(idx) {            
-      this.store.dispatch('finishGame', { payload:{idx, table: 'wiiu'}, toast: this.toast })   
+    finishItem(idx, toggleModal) {            
+      this.store.dispatch('finishGame', { payload:{idx, table: 'wiiu'}, toast: this.toast })
+      toggleModal();   
     },
-    deleteItem(idx) {
+    deleteItem(idx, toggleModal) {
       this.store.dispatch('deleteGame', { payload:{idx, table: 'wiiu'}, toast: this.toast })  
+      toggleModal();  
     },editItem(payload) {
       payload.table = 'wiiu'
       this.store.dispatch('updateGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  

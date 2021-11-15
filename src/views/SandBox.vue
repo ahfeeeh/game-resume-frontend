@@ -1,52 +1,42 @@
 <template>
 <div class="container py-4" style="margin-top:50px">
     <div class="home">
-    <Modal @close="toggleModal" :modalActive="modalActive">
+    <Modal @close="toggleModalDelete" :modalActive="modalActiveDelete">
         <template v-slot:modal-header>
-            Título da página
+            Delete a Game
         </template>
       
        
         <template v-slot:modal-content>            
-            <div class="input-group mb-3  input-group-md">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">ID</span>
-                </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-            </div>
-            <div class="input-group mb-3  input-group-md">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Title</span>
-                </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-            </div>
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input">
-                </div>
-            </div>
-            <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Finished?">
-            </div>
-
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input">
-                </div>
-            </div>
-            <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Fisical Disc?">
-            </div>
+            <h2>Are you sure you want to remove this game?</h2>
         </template>
       
 
         <template v-slot:modal-footer>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary">Delete Game</button>
         </template>
       
 
     </Modal>
-    <button @click="toggleModal" type="button" class="btn btn-primary">Open Modal</button>
+        <Modal @close="toggleModalFinished" :modalActive="modalActiveFinished">
+        <template v-slot:modal-header>
+            Mark Game as Finished
+        </template>
+      
+       
+        <template v-slot:modal-content>            
+            <h2>Are you sure you want to mark this game as finished?</h2>
+        </template>
+      
+
+        <template v-slot:modal-footer>
+            <button type="button" class="btn btn-primary">Mark as Finished</button>
+        </template>
+      
+
+    </Modal>
+    <button @click="toggleModalDelete" type="button" class="btn btn-primary">Open Modal Delete</button>
+    <button @click="toggleModalFinished" type="button" class="btn btn-primary">Open Modal Finished</button>
   </div>
 </div>
 </template>
@@ -60,13 +50,17 @@ export default {
     Modal,
   },
   setup() {
-    const modalActive = ref(false);
+    const modalActiveDelete = ref(false);
+    const modalActiveFinished = ref(false);
 
-    const toggleModal = () => {
-      modalActive.value = !modalActive.value;
+    const toggleModalDelete = () => {
+      modalActiveDelete.value = !modalActiveDelete.value;
+    };
+    const toggleModalFinished = () => {
+      modalActiveFinished.value = !modalActiveFinished.value;
     };
 
-    return { modalActive, toggleModal };
+    return { modalActiveDelete,modalActiveFinished, toggleModalDelete,toggleModalFinished };
   }
 };
 </script>

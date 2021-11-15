@@ -4,7 +4,8 @@ import axios from 'axios';
 export default createStore({
   state: {
     games:[],
-    selectedItem: {ID: "", NAME: "", FINISHED: null, FISICAL_DISC: null} 
+    selectedItem: {ID: "", NAME: "", FINISHED: null, FISICAL_DISC: null},
+    currentIdx: -1 
   },
   mutations: {
     SAVE_GAMES(state, payload){      
@@ -12,6 +13,7 @@ export default createStore({
     },
     SELECT_ITEM(state, payload){
       state.selectedItem = state.games[payload];
+      state.currentIdx = [payload]
     }
   },
   actions: {
@@ -125,6 +127,9 @@ export default createStore({
     },
     getSelectedGame(state){
       return state.selectedItem;
+    },
+    getCurrentIdx(state){
+      return state.currentIdx;
     }
   }
 })
