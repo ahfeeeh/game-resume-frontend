@@ -16,5 +16,13 @@ export default createStore({
   actions: {
   },
   modules: {
+  },
+  getters: {
+    getGames(state) {
+      return state.games;
+    },
+    getSelectedGame(state){
+      return state.selectedItem;
+    }
   }
 })

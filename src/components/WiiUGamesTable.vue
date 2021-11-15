@@ -34,18 +34,18 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3" >ID</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="this.store.state.selectedItem.ID">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.ID">
             </div>
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3">Title</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="this.store.state.selectedItem.NAME">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.NAME">
             </div>
             <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input" v-model="this.store.state.selectedItem.FINISHED">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="getSelectedGame.FINISHED">
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Finished?">
@@ -54,14 +54,14 @@
             <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input" v-model="this.store.state.selectedItem.FISICAL_DISC">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="getSelectedGame.FISICAL_DISC">
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Fisical Disc?">
             </div>
         </template>
         <template v-slot:modal-footer>
-            <button type="button" class="btn btn-primary" @click="editItem(this.store.state.selectedItem)">Save changes</button>
+            <button type="button" class="btn btn-primary" @click="editItem(getSelectedGame)">Save changes</button>
         </template>
     </Modal>  
 </template>
@@ -73,6 +73,7 @@ import { useToast } from "vue-toastification";
 import Modal from "@/components/Modal.vue";
 import { ref } from "vue";
 import { useStore } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'WiiUGamesTable',
@@ -96,12 +97,12 @@ export default {
     },
   data() {
     return {
-      games: [],
-      // selectedItem: {ID: "", NAME: "", FINISHED: null, FISICAL_DISC: null}      
+      games: []      
     }
   },
-  created() {
-  },mounted() {
+  computed: mapGetters(['getGames', 'getSelectedGame']),
+  created() {},
+  mounted() {
     this.getItems();        
   }, 
   methods: {
@@ -124,14 +125,14 @@ export default {
 
       const payload = {
         table: "wiiu",
-        title: this.store.state.selectedItem.NAME,
-        finished: !this.store.state.selectedItem.FINISHED
+        title: this.getSelectedGame.NAME,
+        finished: !this.getSelectedGame.FINISHED
         }      
       
       axios.post('http://localhost:4000/finished', payload).then((resp)=>{
         if(resp){
           this.getItems();
-          this.toast.success(`Success on Mark ${this.store.state.selectedItem.NAME} as ${!this.store.state.selectedItem.FINISHED ? 'Finished': 'Unfinished'} `)
+          this.toast.success(`Success on Mark ${this.getSelectedGame.NAME} as ${!this.getSelectedGame.FINISHED ? 'Finished': 'Unfinished'} `)
         }         
       }).catch((rej) => {
       console.log(rej)
@@ -144,13 +145,13 @@ export default {
 
       const payload = {
         table: "wiiu",
-        title: this.store.state.selectedItem.NAME        
+        title: this.getSelectedGame.NAME        
         }    
 
       axios.delete('http://localhost:4000/remove', { data: payload }).then((resp)=>{        
         if(resp){
           this.getItems();
-          this.toast.success(`Success on Remove ${this.store.state.selectedItem.NAME} from Database`)
+          this.toast.success(`Success on Remove ${this.getSelectedGame.NAME} from Database`)
         }         
       }).catch((rej) => {        
       console.log(rej)
