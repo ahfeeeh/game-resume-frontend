@@ -34,18 +34,18 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3" >ID</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="selectedItem.ID">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="this.store.state.selectedItem.ID">
             </div>
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3">Title</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="selectedItem.NAME">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="this.store.state.selectedItem.NAME">
             </div>
             <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input" v-model="selectedItem.FINISHED">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="this.store.state.selectedItem.FINISHED">
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Finished?">
@@ -54,7 +54,7 @@
             <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input" v-model="selectedItem.FISICAL_DISC">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="this.store.state.selectedItem.FISICAL_DISC">
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Fisical Disc?">
@@ -72,17 +72,22 @@ import axios from 'axios';
 import { useToast } from "vue-toastification";
 import Modal from "@/components/Modal.vue";
 import { ref } from "vue";
+import { useStore } from 'vuex';
 
 export default {
   name: 'WiiUGamesTable',
   setup() {
+
+    const store = useStore();
 
     const modalActive = ref(false);
 
     const toggleModal = (idx) => {
       modalActive.value = !modalActive.value;
       if(modalActive.value){
-        console.log(idx)                           
+        console.log(idx)    
+        store.commit("SELECT_ITEM", idx);
+        // this.selectedItem = store.state.selectedItem
       }      
     };
 
@@ -101,7 +106,8 @@ export default {
       // These options will override the options defined in the "app.use" plugin registration for this specific toast
 
       // Make it available inside methods
-      return { toast, modalActive, toggleModal }
+      // games_store: computed(() => store.state.games)
+      return { toast, modalActive, toggleModal, store }
     },
   data() {
     return {
@@ -110,10 +116,12 @@ export default {
     }
   },
   created() {
-      this.getItems();  
+        
   },mounted() {
+    this.getItems();
         // Since you returned `toast` from setup(), you can access it now
         // this.toast.info("I'm an info toast!");
+        
   }, 
   methods: {
     buttonClick(message) {
@@ -123,7 +131,8 @@ export default {
     },
     getItems(){
       axios.get('http://localhost:4000/wiiu').then((resp) =>{
-      this.games = resp.data.games;      
+      this.games = resp.data.games;
+      this.store.commit("SAVE_GAMES", this.games);        
     }).catch((rej) => {
       console.log(rej)
         this.toast.error("Error on Loading API");
