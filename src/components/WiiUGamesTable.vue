@@ -68,7 +68,6 @@
 
 <script>
 
-import axios from 'axios';
 import { useToast } from "vue-toastification";
 import Modal from "@/components/Modal.vue";
 import { ref } from "vue";
@@ -108,79 +107,16 @@ export default {
       });
     },
     getItems(){
-      axios.get('http://localhost:4000/wiiu').then((resp) =>{
-      this.store.commit("SAVE_GAMES", resp.data.games);        
-    }).catch((rej) => {
-      console.log(rej)
-        this.toast.error("Error on Loading API");
-    }); 
+      this.store.dispatch('getGames', { payload:{table: 'wiiu'}, toast: this.toast })
     },
-    finishItem(idx) {      
-      this.store.commit('SELECT_ITEM', idx);      
-
-      const payload = {
-        table: "wiiu",
-        title: this.getSelectedGame.NAME,
-        finished: !this.getSelectedGame.FINISHED
-        }      
-      
-      axios.post('http://localhost:4000/finished', payload).then((resp)=>{
-        if(resp){
-          this.getItems();
-          this.toast.success(`Success on Mark ${this.getSelectedGame.NAME} as ${!this.getSelectedGame.FINISHED ? 'Finished': 'Unfinished'} `)
-        }         
-      }).catch((rej) => {
-      console.log(rej)
-        this.toast.error("Error on Save Changes on API");
-    }); 
-
+    finishItem(idx) {            
+      this.store.dispatch('finishGame', { payload:{idx, table: 'wiiu'}, toast: this.toast })   
     },
     deleteItem(idx) {
-      this.store.commit('SELECT_ITEM', idx);        
-
-      const payload = {
-        table: "wiiu",
-        title: this.getSelectedGame.NAME        
-        }    
-
-      axios.delete('http://localhost:4000/remove', { data: payload }).then((resp)=>{        
-        if(resp){
-          this.getItems();
-          this.toast.success(`Success on Remove ${this.getSelectedGame.NAME} from Database`)
-        }         
-      }).catch((rej) => {        
-      console.log(rej)
-        this.toast.error("Error on Remove Data API");
-    }); 
-
-
-
+      this.store.dispatch('deleteGame', { payload:{idx, table: 'wiiu'}, toast: this.toast })  
     },editItem(payload) {
-      // TODO send to Backend
-      // TODO Dismiss Modal
-      // TODO show Toast Messages
-      const api_payload = {
-        idx: payload.IDX,
-        id: payload.ID,
-        title: payload.NAME,
-        finished: payload.FINISHED,
-        fisical_disc: payload.FISICAL_DISC,
-        table: 'wiiu'
-      }
-      
-        axios.put('http://localhost:4000/update', api_payload).then((resp)=>{
-        if(resp){
-          this.getItems();
-          this.toggleModal();
-          this.toast.success(`Success on Update ${this.getSelectedGame.NAME}`)
-        }         
-      }).catch((rej) => {
-      console.log(rej)
-        this.toast.error("Error on Save Changes on API");
-    }); 
-
-
-
+      payload.table = 'wiiu'
+      this.store.dispatch('updateGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
     }
   },
   components: {
