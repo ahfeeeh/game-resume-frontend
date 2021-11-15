@@ -54,7 +54,6 @@
 import WiiUGamesTable from '@/components/WiiUGamesTable.vue'
 import Modal from "@/components/Modal.vue";
 import { ref } from "vue";
-import axios from 'axios';
 import { useToast } from "vue-toastification";
 import { useStore } from 'vuex';
 
@@ -84,21 +83,9 @@ export default {
     }
   },
   methods: {
-    saveGame(payload) {      
-
-          axios.post('http://localhost:4000/create', payload).then((resp)=>{
-        if(resp){          
-          this.toast.success(`Success on Create ${this.newItem.title}`)
-          this.toggleModal();
-          this.newItem = {id: "", title: "", finished: null, fisical_disc: null, table: 'wiiu'}      
-          this.reload++;
-        }         
-      }).catch((rej) => {
-      console.log(rej)
-        this.toast.error("Error on Save Changes on API");
-    })
-
-      
+    saveGame(payload) {  
+      this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
+      this.newItem = {id: "", title: "", finished: null, fisical_disc: null, table: 'wiiu'}            
     }
   }
 }

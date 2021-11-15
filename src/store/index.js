@@ -98,6 +98,22 @@ export default createStore({
     }); 
 
 
+    },
+    saveGame(context, {payload, toast, toggleModal}) {
+      console.log('saveGame Payload');
+      console.log(payload);
+
+      axios.post('http://localhost:4000/create', payload).then((resp)=>{
+        if(resp){          
+          toast.success(`Success on Create ${payload.title}`)
+          context.dispatch('getGames', { payload:{table: payload.table}, toast });
+          toggleModal();          
+        }         
+      }).catch((rej) => {
+      console.error(rej)
+        toast.error("Error on Save Changes on API");
+    })
+
     }
   },
   modules: {
