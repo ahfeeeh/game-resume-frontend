@@ -77,7 +77,7 @@ export default {
   methods: {
     saveGame(payload) {  
       this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
-      this.newItem = {id: "", title: "", finished: null, fisical_disc: null, table: 'wiiu'}            
+      this.newItem = {id: "", title: "", finished: null, fisical_disc: null, table: 'ubisoft'}            
     }
   }
 }

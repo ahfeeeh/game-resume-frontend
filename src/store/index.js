@@ -55,6 +55,12 @@ export default createStore({
           title: context.state.selectedItem.NAME,
           finished: !context.state.selectedItem.FINISHED
           }      
+      } else if (payload.table === 'origin') {
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.NAME,
+          finished: !context.state.selectedItem.FINISHED
+          }      
       }
 
       
@@ -92,7 +98,12 @@ export default createStore({
           table: payload.table,
           title: context.state.selectedItem.NAME        
           }    
-      }      
+      } else if (payload.table === 'origin'){
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.NAME        
+          }    
+      }         
 
       axios.delete('http://localhost:4000/remove', { data: api_payload }).then((resp)=>{        
         if(resp){
@@ -138,7 +149,16 @@ export default createStore({
           finished: payload.FINISHED,          
           table: payload.table
         }
+      } else if (payload.table === 'origin') {        
+        api_payload = {
+          idx: payload.IDX,
+          id: payload.ID,
+          title: payload.NAME,
+          finished: payload.FINISHED,          
+          table: payload.table
+        }
       }
+
 
       
 
