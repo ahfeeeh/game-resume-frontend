@@ -4,7 +4,7 @@ import axios from 'axios';
 export default createStore({
   state: {
     games:[],
-    selectedItem: {ID: "", NAME: "", APPID: -1, FINISHED: null, FISICAL_DISC: null},
+    selectedItem: {id: "", title: "", appid: -1, finished: null, fisical_disc: null},
     currentIdx: -1 
   },
   mutations: {
@@ -40,31 +40,31 @@ export default createStore({
       if (payload.table === 'wiiu'){
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.NAME,
-          finished: !context.state.selectedItem.FINISHED
+          title: context.state.selectedItem.title,
+          finished: !context.state.selectedItem.finished
           }      
       } else if (payload.table === 'wii') {
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.Name,
-          finished: !context.state.selectedItem.Finished
+          title: context.state.selectedItem.title,
+          finished: !context.state.selectedItem.finished
           }      
       } else if (payload.table === 'ubisoft') {
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.NAME,
-          finished: !context.state.selectedItem.FINISHED
+          title: context.state.selectedItem.title,
+          finished: !context.state.selectedItem.finished
           }      
       } else if (payload.table === 'origin') {
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.NAME,
-          finished: !context.state.selectedItem.FINISHED
+          title: context.state.selectedItem.title,
+          finished: !context.state.selectedItem.finished
           }      
       } else if (payload.table === 'steam') {        
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.name,
+          title: context.state.selectedItem.title,
           appid: context.state.selectedItem.appid,
           finished: !context.state.selectedItem.finished
           }      
@@ -74,7 +74,7 @@ export default createStore({
         
         if(resp){
           context.dispatch('getGames', { payload:{table: payload.table}, toast });
-          toast.success(`Success on Mark ${context.state.selectedItem.NAME || context.state.selectedItem.name || context.state.selectedItem.Name } as ${!context.state.selectedItem.FINISHED ? 'Finished': 'Unfinished'} `)
+          toast.success(`Success on Mark ${context.state.selectedItem.title } as ${!context.state.selectedItem.finished ? 'Finished': 'Unfinished'} `)
         }         
       }).catch((rej) => {
       console.error(rej)
@@ -92,29 +92,29 @@ export default createStore({
       if(payload.table === 'wiiu'){
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.NAME        
+          title: context.state.selectedItem.title        
           }    
       } else if (payload.table === 'wii'){
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.Name        
+          title: context.state.selectedItem.title        
           }    
       } else if (payload.table === 'ubisoft'){
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.NAME        
+          title: context.state.selectedItem.title        
           }    
       } else if (payload.table === 'origin'){
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.NAME        
+          title: context.state.selectedItem.title        
           }    
       }         
 
       axios.delete('http://localhost:4000/remove', { data: api_payload }).then((resp)=>{        
         if(resp){
           context.dispatch('getGames', { payload:{table: payload.table}, toast });
-          toast.success(`Success on Remove ${context.state.selectedItem.NAME || context.state.selectedItem.Name } from Database`)
+          toast.success(`Success on Remove ${context.state.selectedItem.title} from Database`)
         }         
       }).catch((rej) => {        
       console.error(rej)
@@ -131,48 +131,45 @@ export default createStore({
 
       if(payload.table === 'wiiu'){
         api_payload = {
-          idx: payload.IDX,
-          id: payload.ID,
-          title: payload.NAME,
-          finished: payload.FINISHED,
-          fisical_disc: payload.FISICAL_DISC,
+          idx: payload.idx,
+          id: payload.id,
+          title: payload.title,
+          finished: payload.finished,
+          fisical_disc: payload.fisical_disc,
           table: payload.table
         }
       } else if (payload.table === 'wii') {        
         api_payload = {
-          idx: payload.IDX,
-          id: payload.ID,
-          title: payload.Name,
-          finished: payload.Finished,
-          fisical_disc: payload['Fisical Disc'],
+          idx: payload.idx,
+          id: payload.id,
+          title: payload.title,
+          finished: payload.finished,
+          fisical_disc: payload['fisical_disc'],
           table: payload.table
         }
       } else if (payload.table === 'ubisoft') {        
         api_payload = {
-          idx: payload.IDX,
-          id: payload.ID,
-          title: payload.NAME,
-          finished: payload.FINISHED,          
+          idx: payload.idx,
+          id: payload.id,
+          title: payload.title,
+          finished: payload.finished,
           table: payload.table
         }
       } else if (payload.table === 'origin') {        
         api_payload = {
-          idx: payload.IDX,
-          id: payload.ID,
-          title: payload.NAME,
-          finished: payload.FINISHED,          
+          idx: payload.idx,
+          id: payload.id,
+          title: payload.title,
+          finished: payload.finished,
           table: payload.table
         }
-      }
-
-
-      
+      }      
 
       axios.put('http://localhost:4000/update', api_payload).then((resp)=>{
         if(resp){
           context.dispatch('getGames', { payload:{table: payload.table}, toast });
           toggleModal()
-          toast.success(`Success on Update ${context.state.selectedItem.NAME || context.state.selectedItem.Name }`)
+          toast.success(`Success on Update ${context.state.selectedItem.title}`)
         }         
       }).catch((rej) => {
       console.log(rej)
