@@ -51,6 +51,12 @@ const routes = [
     path: '/sandbox',
     name: 'SandBox',
     component: () => import('../views/SandBox.vue')
+  },
+  {
+    path: '/search/:query',
+    name: 'Search',    
+    component: () => import('../views/Search.vue'),
+    props: true    
   }
 ]
 

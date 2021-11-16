@@ -53,9 +53,9 @@
           <input
             class="form-control me-2"
             type="search"
-            placeholder="Search"
+            placeholder="Search" v-model="query"
             aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button class="btn btn-outline-success" @click.stop.prevent="gotoSearch(query)">Search</button>
         </form>
       </div>
     </div>
@@ -64,7 +64,12 @@
 
 <script>
 
-export default {
+export default {  
+  data(){
+    return {
+      query: ""
+    }
+  },
   methods: {
     goToHome() {
       this.$router.push({ path: "/" });
@@ -84,6 +89,11 @@ export default {
     goToWiiUGames() {
       this.$router.push({ path: "wiiu" });
     },
+    gotoSearch(searchParam) {
+      if(searchParam) {
+      this.$router.push({ name: "Search", params: {query: searchParam}  });
+      }      
+    }
   },
   mounted() {    
       document.querySelector('#navbarSideCollapse').addEventListener('click', function () {
