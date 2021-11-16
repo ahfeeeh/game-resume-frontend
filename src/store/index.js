@@ -4,7 +4,7 @@ import axios from 'axios';
 export default createStore({
   state: {
     games:[],
-    selectedItem: {ID: "", NAME: "", FINISHED: null, FISICAL_DISC: null},
+    selectedItem: {ID: "", NAME: "", APPID: -1, FINISHED: null, FISICAL_DISC: null},
     currentIdx: -1 
   },
   mutations: {
@@ -61,14 +61,20 @@ export default createStore({
           title: context.state.selectedItem.NAME,
           finished: !context.state.selectedItem.FINISHED
           }      
-      }
-
-      
+      } else if (payload.table === 'steam') {        
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.name,
+          appid: context.state.selectedItem.appid,
+          finished: !context.state.selectedItem.finished
+          }      
+      }            
       
       axios.post('http://localhost:4000/finished', api_payload).then((resp)=>{
+        
         if(resp){
           context.dispatch('getGames', { payload:{table: payload.table}, toast });
-          toast.success(`Success on Mark ${context.state.selectedItem.NAME} as ${!context.state.selectedItem.FINISHED ? 'Finished': 'Unfinished'} `)
+          toast.success(`Success on Mark ${context.state.selectedItem.NAME || context.state.selectedItem.name || context.state.selectedItem.Name } as ${!context.state.selectedItem.FINISHED ? 'Finished': 'Unfinished'} `)
         }         
       }).catch((rej) => {
       console.error(rej)
@@ -108,7 +114,7 @@ export default createStore({
       axios.delete('http://localhost:4000/remove', { data: api_payload }).then((resp)=>{        
         if(resp){
           context.dispatch('getGames', { payload:{table: payload.table}, toast });
-          toast.success(`Success on Remove ${context.state.selectedItem.NAME} from Database`)
+          toast.success(`Success on Remove ${context.state.selectedItem.NAME || context.state.selectedItem.Name } from Database`)
         }         
       }).catch((rej) => {        
       console.error(rej)
@@ -166,7 +172,7 @@ export default createStore({
         if(resp){
           context.dispatch('getGames', { payload:{table: payload.table}, toast });
           toggleModal()
-          toast.success(`Success on Update ${context.state.selectedItem.NAME}`)
+          toast.success(`Success on Update ${context.state.selectedItem.NAME || context.state.selectedItem.Name }`)
         }         
       }).catch((rej) => {
       console.log(rej)
