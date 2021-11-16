@@ -48,6 +48,9 @@
           <li class="nav-item">
             <a class="nav-link" style="cursor:pointer" @click="goToWiiUGames">WiiU Games</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" style="cursor:pointer" @click="goToResume">Resume</a>
+          </li>
         </ul>
         <form class="d-flex">
           <input
@@ -93,6 +96,8 @@ export default {
       if(searchParam) {
       this.$router.push({ name: "Search", params: {query: searchParam}  });
       }      
+    },goToResume(){
+      this.$router.push({ path: "resume" });
     }
   },
   mounted() {    
