@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th>Idx</th>
+        <th>Id</th>
         <th>Title</th>        
         <th>Finished ?</th>
         <th>Actions</th>
@@ -10,9 +11,10 @@
     </thead>
     <tbody>  
       <tr v-for="game, idx in getGames" :key="idx">
-        <td>{{idx + 1 }}</td>
-        <td>{{game.NAME}}</td>            
-        <td><input type="checkbox" v-model="game.FINISHED" :disabled=true></td>        
+        <td>{{game.idx }}</td>
+        <td>{{game.id }}</td>
+        <td>{{game.title}}</td>            
+        <td><input type="checkbox" v-model="game.finished" :disabled=true></td>        
         <td>
           <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
           <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
@@ -30,18 +32,18 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3" >ID</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.ID">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.id">
             </div>
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3">Title</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.NAME">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.title">
             </div>
             <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input" v-model="getSelectedGame.FINISHED">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="getSelectedGame.finished">
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Finished?">

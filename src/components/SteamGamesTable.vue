@@ -11,9 +11,9 @@
     </thead>
     <tbody>  
       <tr v-for="game, idx in getGames" :key="idx">
-        <td>{{idx + 1 }}</td>
+        <td>{{game.idx }}</td>
         <td>{{game.appid}}</td>
-        <td>{{game.name}}</td>            
+        <td>{{game.title}}</td>            
         <td><input type="checkbox" v-model="game.finished" :disabled=true></td>        
         <td>
           <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;          
