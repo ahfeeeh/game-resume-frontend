@@ -77,8 +77,7 @@ export default {
     return { modalActive, toggleModal, toast, store };
   },
   data() {
-    return {
-      reload: 0,
+    return {      
       newItem: {id: "", title: "", finished: null, fisical_disc: null, table: 'wiiu'}      
     }
   },

@@ -49,6 +49,12 @@ export default createStore({
           title: context.state.selectedItem.Name,
           finished: !context.state.selectedItem.Finished
           }      
+      } else if (payload.table === 'ubisoft') {
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.NAME,
+          finished: !context.state.selectedItem.FINISHED
+          }      
       }
 
       
@@ -80,6 +86,11 @@ export default createStore({
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.Name        
+          }    
+      } else if (payload.table === 'ubisoft'){
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.NAME        
           }    
       }      
 
@@ -117,6 +128,14 @@ export default createStore({
           title: payload.Name,
           finished: payload.Finished,
           fisical_disc: payload['Fisical Disc'],
+          table: payload.table
+        }
+      } else if (payload.table === 'ubisoft') {        
+        api_payload = {
+          idx: payload.IDX,
+          id: payload.ID,
+          title: payload.NAME,
+          finished: payload.FINISHED,          
           table: payload.table
         }
       }
