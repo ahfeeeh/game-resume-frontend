@@ -36,9 +36,11 @@ export default {
 
   },
   created() {    
-    axios.get('http://localhost:4000/statistics?from=totals').then(resp => {
+    setTimeout(() =>{
+      axios.get('http://localhost:4000/statistics?from=totals').then(resp => {
       this.data = resp.data.result;
     })
+    },1000)    
   }
 }
 </script>
