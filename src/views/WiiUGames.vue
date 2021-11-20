@@ -5,7 +5,9 @@
     </div>
   <div class="about">
     <h1>WiiU Games Table</h1>
-    <WiiUGamesTable />
+    <div class="table-responsive">
+      <WiiUGamesTable />
+    </div>    
     <Modal @close="toggleModal" :modalActive="modalActive">
         <template v-slot:modal-header>
             Add a New Game
