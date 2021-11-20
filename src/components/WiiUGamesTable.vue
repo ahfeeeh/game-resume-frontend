@@ -273,6 +273,7 @@ export default {
         context.dlcs = []
       }
     };
+    
     const markDlcAsFinished = (idx, id, finished, context) => {
       console.log("Mark dlc as finished idx: ",idx)
       console.log("id:", id)
