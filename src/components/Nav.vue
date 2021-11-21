@@ -1,16 +1,6 @@
-<template>
-  <!-- <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/all_games">All Games</router-link> |
-        <router-link to="/origin">Origin Games</router-link> |
-        <router-link to="/ubisoft">Ubisoft Games</router-link> |
-        <router-link to="/steam">Steam Games</router-link> |
-        <router-link to="/wii">Wii Games</router-link> |
-        <router-link to="/wiiu">WiiU Games</router-link> 
-    </div> -->
+<template>  
 
-  <nav
-    class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"
     aria-label="Main navigation">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">My Games Resume</a>
@@ -26,39 +16,65 @@
         class="navbar-collapse offcanvas-collapse"
         id="navbarsExampleDefault">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li class="nav-item dropdown">
             <a
-              class="nav-link"
-              aria-current="page"
-              style="cursor:pointer"
-              @click="goToHome">Home</a>
-          </li>     
-          <li class="nav-item">
-            <a class="nav-link" style="cursor:pointer" @click="goToOriginGames">Origin Games</a>
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarScrollingDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              PC Games
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" style="cursor: pointer" @click="goToOriginGames">Origin Games</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" style="cursor: pointer" @click="goToSteamGames">Steam Games</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" style="cursor: pointer" @click="goToUbisoftGames">Ubisoft Games</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" style="cursor:pointer" @click="goToUbisoftGames">Ubisoft Games</a>
+
+                    <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarScrollingDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Console Games
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" style="cursor: pointer" @click="goToGameCubeGames">GameCube Games</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" style="cursor: pointer" @click="goToWiiGames">Wii Games</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" style="cursor: pointer" @click="goToWiiUGames">WiiU Games</a></li>
+            </ul>
           </li>
+          
           <li class="nav-item">
-            <a class="nav-link" style="cursor:pointer" @click="goToSteamGames">Steam Games</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="cursor:pointer" @click="goToWiiGames">Wii Games</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="cursor:pointer" @click="goToWiiUGames">WiiU Games</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="cursor:pointer" @click="goToResume">Resume</a>
-          </li>
+            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToHome">Home</a>
+          </li>          
+          
         </ul>
         <form class="d-flex">
           <input
             class="form-control me-2"
             type="search"
-            placeholder="Search" v-model="query"
-            aria-label="Search" />
-          <button class="btn btn-outline-success" @click.stop.prevent="gotoSearch(query)">Search</button>
+            placeholder="Search"
+            v-model="query"
+            aria-label="Search"
+          />
+          <button
+            class="btn btn-outline-success"
+            @click.stop.prevent="gotoSearch(query)"
+          >
+            Search
+          </button>
         </form>
       </div>
     </div>
@@ -66,12 +82,11 @@
 </template>
 
 <script>
-
-export default {  
-  data(){
+export default {
+  data() {
     return {
-      query: ""
-    }
+      query: "",
+    };
   },
   methods: {
     goToHome() {
@@ -93,17 +108,20 @@ export default {
       this.$router.push({ path: "wiiu" });
     },
     gotoSearch(searchParam) {
-      if(searchParam) {
-      this.$router.push({ name: "Search", params: {query: searchParam}  });
-      }      
-    },goToResume(){
+      if (searchParam) {
+        this.$router.push({ name: "Search", params: { query: searchParam } });
+      }
+    },
+    goToResume() {
       this.$router.push({ path: "resume" });
-    }
+    },
   },
-  mounted() {    
-      document.querySelector('#navbarSideCollapse').addEventListener('click', function () {
-      document.querySelector('.offcanvas-collapse').classList.toggle('open')
-  })
+  mounted() {
+    document
+      .querySelector("#navbarSideCollapse")
+      .addEventListener("click", function () {
+        document.querySelector(".offcanvas-collapse").classList.toggle("open");
+      });
   },
 };
 </script>
