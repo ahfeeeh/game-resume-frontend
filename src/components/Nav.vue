@@ -26,7 +26,11 @@
           </li>   
 
           <li class="nav-item">
-            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToToByGames">To Buy Games</a>
+            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToToBuyGames">To Buy Games</a>
+          </li>   
+
+          <li class="nav-item">
+            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToDLCGames">DLC Games</a>
           </li>   
 
 
@@ -122,6 +126,9 @@ export default {
     goToWiiUGames() {
       this.$router.push({ path: "wiiu" });
     },
+    goToDLCGames() {
+      this.$router.push({ path: "dlcs" });
+    },
     gotoSearch(searchParam) {
       if (searchParam) {
         this.$router.push({ name: "Search", params: { query: searchParam } });
@@ -130,7 +137,7 @@ export default {
     goToResume() {
       this.$router.push({ path: "resume" });
     },
-    goToToByGames(){
+    goToToBuyGames(){
       this.$router.push({ path: "tobuy" });
     }
   },
