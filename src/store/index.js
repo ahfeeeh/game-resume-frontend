@@ -49,6 +49,12 @@ export default createStore({
           title: context.state.selectedItem.title,
           finished: !context.state.selectedItem.finished
         }
+      } else if (payload.table === 'gamecube') {
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.title,
+          finished: !context.state.selectedItem.finished
+        }
       } else if (payload.table === 'ubisoft') {
         api_payload = {
           table: payload.table,
@@ -80,7 +86,8 @@ export default createStore({
         console.error(rej)
         toast.error("Error on Save Changes on API");
       });
-    }, deleteGame(context, { payload, toast }) {
+    },
+    deleteGame(context, { payload, toast }) {
 
       context.commit('SELECT_ITEM', payload.idx);
 
@@ -99,7 +106,13 @@ export default createStore({
           table: payload.table,
           title: context.state.selectedItem.title
         }
-      } else if (payload.table === 'ubisoft') {
+      } else if (payload.table === 'gamecube') {
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.title
+        }
+      }
+      else if (payload.table === 'ubisoft') {
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title
@@ -139,6 +152,15 @@ export default createStore({
           table: payload.table
         }
       } else if (payload.table === 'wii') {
+        api_payload = {
+          idx: payload.idx,
+          id: payload.id,
+          title: payload.title,
+          finished: payload.finished,
+          fisical_disc: payload['fisical_disc'],
+          table: payload.table
+        }
+      } else if (payload.table === 'gamecube') {
         api_payload = {
           idx: payload.idx,
           id: payload.id,

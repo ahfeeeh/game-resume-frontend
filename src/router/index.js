@@ -33,6 +33,11 @@ const routes = [
     component: () => import('../views/WiiGames.vue')
   },  
   {
+    path: '/gamecube',
+    name: 'GameCubeGames',
+    component: () => import('../views/GameCubeGames.vue')
+  }, 
+  {
     path: '/wiiu',
     name: 'WiiUGames',
     component: () => import('../views/WiiUGames.vue')
@@ -62,6 +67,11 @@ const routes = [
     path: '/resume',
     name: 'GamesResume',
     component: () => import('../views/GamesResume.vue')
+  },
+  {
+    path: '/tobuy',
+    name: 'TOBuyGames',
+    component: () => import('../views/ToBuyGames.vue')
   }
 ]
 

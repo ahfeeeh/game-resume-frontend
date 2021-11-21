@@ -16,6 +16,20 @@
         class="navbar-collapse offcanvas-collapse"
         id="navbarsExampleDefault">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToHome">Home</a>
+          </li>          
+
+          <li class="nav-item">
+            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToResume">Resume</a>
+          </li>   
+
+          <li class="nav-item">
+            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToToByGames">To Buy Games</a>
+          </li>   
+
+
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -36,7 +50,7 @@
             </ul>
           </li>
 
-                    <li class="nav-item dropdown">
+          <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -56,9 +70,7 @@
             </ul>
           </li>
           
-          <li class="nav-item">
-            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToHome">Home</a>
-          </li>          
+          
           
         </ul>
         <form class="d-flex">
@@ -104,6 +116,9 @@ export default {
     goToWiiGames() {
       this.$router.push({ path: "wii" });
     },
+    goToGameCubeGames() {
+      this.$router.push({ path: "gamecube" });
+    },
     goToWiiUGames() {
       this.$router.push({ path: "wiiu" });
     },
@@ -115,6 +130,9 @@ export default {
     goToResume() {
       this.$router.push({ path: "resume" });
     },
+    goToToByGames(){
+      this.$router.push({ path: "tobuy" });
+    }
   },
   mounted() {
     document
