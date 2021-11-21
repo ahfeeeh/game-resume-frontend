@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th>Idx</th>
+        <th>Image</th>
         <th>ID</th>
         <th>Title</th>
         <th>Finished ?</th>
@@ -13,6 +14,7 @@
     <tbody>
       <tr v-for="(game, idx) in getGames" :key="idx">
         <td>{{ game.idx }}</td>
+        <td><img :src="`http://localhost:4000/${game.id}.jpg`" class="img-fluid img-thumbnail"></td>
         <td>{{ game.id }}</td>
         <td>{{ game.title }}</td>
         <td>
@@ -351,4 +353,8 @@ export default {
 </script>
 
 <style scoped>
+.table-image td, .table-image th {
+  vertical-align: middle;
+}
+ 
 </style>
