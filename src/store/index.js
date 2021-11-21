@@ -74,6 +74,13 @@ export default createStore({
           appid: context.state.selectedItem.appid,
           finished: !context.state.selectedItem.finished
         }
+      } else if (payload.table === 'tobuy') {
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.title,
+          idx: context.state.selectedItem.idx,
+          finished: !context.state.selectedItem.finished
+        }
       }
 
       axios.post('http://localhost:4000/finished', api_payload).then((resp) => {
@@ -121,6 +128,12 @@ export default createStore({
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title
+        }
+      } else if (payload.table === 'tobuy') {
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.title,
+          idx: context.state.selectedItem.idx
         }
       }
 
@@ -183,6 +196,14 @@ export default createStore({
           id: payload.id,
           title: payload.title,
           finished: payload.finished,
+          table: payload.table
+        }
+      } else if (payload.table === 'tobuy') {
+        api_payload = {
+          idx: payload.idx,          
+          title: payload.title,
+          finished: payload.finished,
+          system: payload.system,
           table: payload.table
         }
       }
