@@ -5,7 +5,9 @@
     </div>
   <div class="about">
     <h1>Wii Games Table</h1>
-    <WiiGamesTable />
+    <div class="table-responsive">
+      <WiiGamesTable />
+    </div>    
         <Modal @close="toggleModal" :modalActive="modalActive">
         <template v-slot:modal-header>
             Add a New Game

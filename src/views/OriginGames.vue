@@ -5,7 +5,9 @@
     </div>
   <div class="about">
     <h1>Origin Games Table</h1>
-    <OriginGamesTable />
+    <div class="table-responsive">
+      <OriginGamesTable />
+    </div>    
     <Modal @close="toggleModal" :modalActive="modalActive">
         <template v-slot:modal-header>
             Add a New Game

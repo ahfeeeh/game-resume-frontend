@@ -22,9 +22,11 @@
         <td><input type="checkbox" v-model="game.finished" :disabled=true></td>   
         <td><input type="checkbox" v-model="game['fisical_disc']" :disabled=true></td>
         <td>
-          <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
-          <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-          <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
+          <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
+          </div>          
         </td>
       </tr>
     </tbody>   

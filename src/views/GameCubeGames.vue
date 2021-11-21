@@ -5,7 +5,9 @@
     </div>
   <div class="about">
     <h1>GameCube Games Table</h1>
-    <GameCubeGamesTable />
+    <div class="table-responsive">
+      <GameCubeGamesTable />
+    </div>    
         <Modal @close="toggleModal" :modalActive="modalActive">
         <template v-slot:modal-header>
             Add a New Game

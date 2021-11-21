@@ -5,7 +5,9 @@
     </div>
   <div class="about">
     <h1>Ubisoft Games Table</h1>
-    <UbisoftGamesTable />
+    <div class="table-responsive">
+      <UbisoftGamesTable />
+    </div>    
     <Modal @close="toggleModal" :modalActive="modalActive">
         <template v-slot:modal-header>
             Add a New Game
