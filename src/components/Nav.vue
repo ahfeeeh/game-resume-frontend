@@ -26,6 +26,10 @@
           </li>   
 
           <li class="nav-item">
+            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToCharts">Charts</a>
+          </li>   
+
+          <li class="nav-item">
             <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToToBuyGames">To Buy Games</a>
           </li>   
 
@@ -144,6 +148,9 @@ export default {
     },
     goToVirtualConsoleGames(){
       this.$router.push({ path: "virtualconsole" });
+    },
+    goToCharts(){
+      this.$router.push({ path: "charts" });
     }
   },
   mounted() {

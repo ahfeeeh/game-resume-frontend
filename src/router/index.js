@@ -53,9 +53,9 @@ const routes = [
     component: () => import('../views/ConsoleGames.vue')
   },
   {
-    path: '/sandbox',
-    name: 'SandBox',
-    component: () => import('../views/SandBox.vue')
+    path: '/charts',
+    name: 'Charts',
+    component: () => import('../views/MyCharts.vue')
   },
   {
     path: '/search/:query',
