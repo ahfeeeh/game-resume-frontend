@@ -88,6 +88,13 @@ export default createStore({
           idx: context.state.selectedItem.idx,
           finished: !context.state.selectedItem.finished
         }
+      } else if (payload.table === 'dlcs') {
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.title,
+          idx: context.state.selectedItem.idx,
+          finished: !context.state.selectedItem.finished
+        }
       }
 
       axios.post('http://localhost:4000/finished', api_payload).then((resp) => {
@@ -143,6 +150,12 @@ export default createStore({
           idx: context.state.selectedItem.idx
         }
       } else if (payload.table === 'virtualconsole') {
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.title,
+          idx: context.state.selectedItem.idx
+        }
+      } else if (payload.table === 'dlcs') {
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
@@ -227,6 +240,14 @@ export default createStore({
           finished: payload.finished,
           system: payload.system,
           console: payload.console,
+          table: payload.table
+        }
+      } else if (payload.table === 'dlcs') {
+        api_payload = {
+          idx: payload.idx,
+          id: payload.id,
+          title: payload.title,
+          finished: payload.finished,
           table: payload.table
         }
       }
