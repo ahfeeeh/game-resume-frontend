@@ -4,32 +4,38 @@
     <div class="row">
       <div class="col">
         <TotalOfGamesChart />
-      </div>       
+      </div>
       <div class="col">
         <TotalOfFinishedGamesChart />
-      </div>       
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <TotalOfGamesChartPie />
+      </div>
+      <div class="col">
+        
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import TotalOfGamesChart from '@/components/TotalOfGamesChart.vue'
-import TotalOfFinishedGamesChart from '@/components/TotalOfFinishedGamesChart.vue'
+import TotalOfGamesChart from "@/components/TotalOfGamesChart.vue";
+import TotalOfGamesChartPie from "@/components/TotalOfGamesChartPie.vue";
+import TotalOfFinishedGamesChart from "@/components/TotalOfFinishedGamesChart.vue";
 export default {
   name: "MyCharts",
   components: {
     TotalOfGamesChart,
-    TotalOfFinishedGamesChart
+    TotalOfGamesChartPie,
+    TotalOfFinishedGamesChart,
   },
   data() {
     return {};
   },
-  setup() {    
-    
-  },
-  created() {
-    
-  },
+  setup() {},
+  created() {},
 };
 </script>
 
