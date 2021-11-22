@@ -71,6 +71,8 @@
               <li><a class="dropdown-item" style="cursor: pointer" @click="goToWiiGames">Wii Games</a></li>
               <li><hr class="dropdown-divider" /></li>
               <li><a class="dropdown-item" style="cursor: pointer" @click="goToWiiUGames">WiiU Games</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" style="cursor: pointer" @click="goToVirtualConsoleGames">Virtual Console Games</a></li>
             </ul>
           </li>
           
@@ -139,6 +141,9 @@ export default {
     },
     goToToBuyGames(){
       this.$router.push({ path: "tobuy" });
+    },
+    goToVirtualConsoleGames(){
+      this.$router.push({ path: "virtualconsole" });
     }
   },
   mounted() {

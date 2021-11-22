@@ -77,6 +77,11 @@ const routes = [
     path: '/dlcs',
     name: 'DLCGames',
     component: () => import('../views/DLCGames.vue')
+  },
+  {
+    path: '/virtualconsole',
+    name: 'VirtualConsoleGames',
+    component: () => import('../views/VirtualConsoleGames.vue')
   }
 ]
 
