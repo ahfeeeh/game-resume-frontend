@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="totaloffinishedgameschart"></canvas>
+    <canvas id="totaloffinishedgameschartpie"></canvas>
   </div>
 </template>
 
@@ -11,16 +11,16 @@ import axios from "axios";
 Chart.register(...registerables);
 
 export default {
-  name: "TotalOfFinishedGamesChart",
+  name: "TotalOfFinishedGamesChartPie",
   data() {
     return {
       chartData: {
-        type: "line",
+        type: "doughnut",
         options: {
           plugins: {
             title: {
               display: true,
-              text: "Total of Finished Games",
+              text: "Percentual of Finished Games",
             },
           },
         },
@@ -30,9 +30,12 @@ export default {
             {
               label: "",
               data: [],
-              fill: false,
-              borderColor: "rgb(75, 192, 192)",
-              tension: 0.1,
+              backgroundColor: [
+                "rgb(255, 99, 132)",
+                "rgb(54, 162, 235)",
+                "rgb(255, 205, 86)",
+              ],
+              hoverOffset: 4,
             },
           ],
         },
@@ -40,23 +43,22 @@ export default {
     };
   },
   async mounted() {
-    try {
-      setTimeout(async () => {
+    setTimeout(async () => {
+      try {
         const api_data = await axios.get(
-          "http://localhost:4000/charts?type=finished"
+          "http://localhost:4000/charts?type=finished_percent"
         );
         this.chartData.data.labels = api_data.data.labels;
-        this.chartData.data.datasets[0].label = api_data.data.dataset;
+        // this.chartData.options.plugins.title = api_data.data.dataset;
         this.chartData.data.datasets[0].data = api_data.data.values;
-
         const ctx = document
-          .getElementById("totaloffinishedgameschart")
+          .getElementById("totaloffinishedgameschartpie")
           .getContext("2d");
         new Chart(ctx, this.chartData);
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-    }
+      } catch (error) {
+        console.error(error);
+      }
+    }, 1600);
   },
 };
 </script>

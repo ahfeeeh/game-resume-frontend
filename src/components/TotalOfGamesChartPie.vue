@@ -1,76 +1,77 @@
 <template>
   <div>
-    <canvas id="chartpie"></canvas>
+    <canvas id="totalofgameschartpie"></canvas>
   </div>
 </template>
 
 <script>
-import Chart from "chart.js";
+import { Chart, registerables } from "chart.js";
 import axios from "axios";
 
+Chart.register(...registerables);
+
 export default {
-  name: "ChartPie",
+  name: "TotalOfGamesChartPie",
   data() {
     return {
       chartData: {
-        type: "pie",
+        type: "doughnut",
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "Percentual of Games",
+            },
+          },
+        },
         data: {
           labels: [],
           datasets: [
             {
               label: "",
               data: [],
-              backgroundColor: "rgba(54,73,93,.5)",
-              borderColor: "#71706d",
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
               borderWidth: 1,
+              hoverOffset: 4,
             },
           ],
-        },
-        options: {
-          responsive: true,
-          lineTension: 1,
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  padding: 25,
-                },
-              },
-            ],
-          },
-          title: {
-            display: true,
-            text: "",
-          },
         },
       },
     };
   },
   async mounted() {
-    try {
-      const api_data = await axios.get(
-        "http://localhost:4000/charts?type=total_percent"
-      );
-      this.chartData.data.labels = api_data.data.labels;
-      this.chartData.data.datasets[0].backgroundColor = [
-        "rgba(255,101,80,.5)",
-        "rgba(255,203,80,.5)",
-        "rgba(255,103,198,.5)",
-        "rgba(128,103,198,.5)",
-        "rgba(128,255,198,.5)",
-        "rgba(255,255,36,.5)",
-        "rgba(255,178,255,.5)",
-      ];
-      this.chartData.data.datasets[0].label = api_data.data.dataset;
-      this.chartData.data.datasets[0].data = api_data.data.values;
-      this.chartData.options.title.text = "Percent of Total Games";
-    } catch (error) {
-      console.error(error);
-    }
-
-    const ctx = document.getElementById("chartpie");
-    new Chart(ctx, this.chartData);
+    setTimeout(async () => {
+      try {
+        const api_data = await axios.get(
+          "http://localhost:4000/charts?type=total_percent"
+        );
+        console.log(api_data);
+        this.chartData.data.labels = api_data.data.labels;
+        this.chartData.data.datasets[0].label = api_data.data.dataset;
+        this.chartData.data.datasets[0].data = api_data.data.values;        
+        const ctx = document
+          .getElementById("totalofgameschartpie")
+          .getContext("2d");
+        new Chart(ctx, this.chartData);
+      } catch (error) {
+        console.error(error);
+      }
+    }, 1500);
   },
 };
 </script>
