@@ -1,5 +1,8 @@
 <template>
-<div class="container py-4" style="margin-top:50px">
+<div class="all-content">
+    <Loading v-if="isLoading"></Loading>
+    <div v-if="!isLoading" class="container py-4" style="margin-top:50px">
+  
     <div class="row align-items-start">
       <button type="button" class="btn btn-primary btn-lg btn-block" @click="toggleModal">Add a new Game</button>
     </div>
@@ -49,6 +52,7 @@
     </Modal>
   </div>
 </div>
+</div>
 </template>
 
 <script>
@@ -58,12 +62,15 @@ import Modal from "@/components/Modal.vue";
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
 import { useStore } from 'vuex';
+import Loading from "@/components/Loading.vue";
+
 
 export default {
   name: 'WiiUGames',
   components: {
     WiiUGamesTable,
-    Modal    
+    Modal,    
+    Loading
   },
   setup() {
     const store = useStore();
@@ -80,8 +87,14 @@ export default {
   },
   data() {
     return {      
+      isLoading: true,
       newItem: {id: "", title: "", finished: null, fisical_disc: null, table: 'wiiu'}      
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
   },
   methods: {
     saveGame(payload) {  
@@ -91,3 +104,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>

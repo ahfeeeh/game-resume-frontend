@@ -16,11 +16,8 @@ export default createStore({
       state.currentIdx = [payload]
     }
   },
-  actions: {
+  actions: {    
     getGames(context, { payload, toast }) {
-      console.log('getGames Payload');
-      console.log(payload);
-
       axios.get(`http://localhost:4000/${payload.table}`).then((resp) => {
         context.commit("SAVE_GAMES", resp.data.games);
         toast.success('Data Loaded Successfully', { timeout: 2000 });
@@ -31,10 +28,7 @@ export default createStore({
     },
     finishGame(context, { payload, toast }) {
 
-      context.commit('SELECT_ITEM', payload.idx);
-
-      console.log('finishGame Payload');
-      console.log(payload);
+      context.commit('SELECT_ITEM', payload.idx);      
 
       let api_payload;
       if (payload.table === 'wiiu') {
@@ -110,10 +104,7 @@ export default createStore({
     },
     deleteGame(context, { payload, toast }) {
 
-      context.commit('SELECT_ITEM', payload.idx);
-
-      console.log('deleteGame Payload');
-      console.log(payload);
+      context.commit('SELECT_ITEM', payload.idx);      
 
       let api_payload;
 
@@ -175,9 +166,6 @@ export default createStore({
 
     },
     updateGame(context, { payload, toast, toggleModal }) {
-
-      console.log('updateGame Payload');
-      console.log(payload);
 
       let api_payload;
 
@@ -259,15 +247,13 @@ export default createStore({
           toast.success(`Success on Update ${context.state.selectedItem.title}`)
         }
       }).catch((rej) => {
-        console.log(rej)
+        console.error(rej)
         toast.error("Error on Save Changes on API");
       });
 
 
     },
-    saveGame(context, { payload, toast, toggleModal }) {
-      console.log('saveGame Payload');
-      console.log(payload);
+    saveGame(context, { payload, toast, toggleModal }) {     
 
       axios.post('http://localhost:4000/create', payload).then((resp) => {
         if (resp) {
@@ -280,7 +266,7 @@ export default createStore({
         toast.error("Error on Save Changes on API");
       })
 
-    }
+    },
   },
   modules: {
 
