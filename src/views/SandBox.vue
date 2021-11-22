@@ -1,38 +1,30 @@
 <template>
-<div class="container py-4" style="margin-top:50px">
+  <div class="container py-4" style="margin-top: 50px">
     <h1>SandBox</h1>
     <div class="row">
-      <div class="col">
-        
-        </div>
-      <div class="col">
-
-        </div>      
+       <Chart/>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
-
+import Chart from '@/components/Chart.vue'
 export default {
   name: "SandBox",
   components: {
+    Chart
+  },
+  data() {
+    return {};
+  },
+  setup() {    
     
-  },
-  data(){
-    return {
-      
-    }
-  },
-  setup() {
-
   },
   created() {
     
-  }
+  },
 };
 </script>
 
 <style scoped>
-
 </style>

@@ -3,7 +3,7 @@
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"
     aria-label="Main navigation">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">My Games Resume</a>
+      <a class="navbar-brand" @click="goToHome" style="cursor: pointer">My Games Resume</a>
       <button
         class="navbar-toggler p-0 border-0"
         type="button"
