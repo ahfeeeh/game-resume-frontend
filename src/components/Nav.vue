@@ -21,13 +21,24 @@
             <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToHome">Home</a>
           </li>          
 
-          <li class="nav-item">
-            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToResume">Resume</a>
-          </li>   
-
-          <li class="nav-item">
-            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToCharts">Charts</a>
-          </li>   
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarScrollingDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Stats
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item"  aria-current="page" style="cursor: pointer" @click="goToResume">Resume</a></li>   
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item"  aria-current="page" style="cursor: pointer" @click="goToCharts">Charts</a></li>                 
+            </ul>
+          </li>
+        
 
           <li class="nav-item">
             <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToToBuyGames">To Buy Games</a>
