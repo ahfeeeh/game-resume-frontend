@@ -34,6 +34,9 @@ export default {
                 "rgb(255, 99, 132)",
                 "rgb(54, 162, 235)",
                 "rgb(255, 205, 86)",
+                "rgba(7, 174, 89)",
+                "rgba(236, 255, 0)",
+                "rgba(189, 0, 255)"
               ],
               hoverOffset: 4,
             },
@@ -48,8 +51,7 @@ export default {
         const api_data = await axios.get(
           "http://localhost:4000/charts?type=finished_percent"
         );
-        this.chartData.data.labels = api_data.data.labels;
-        // this.chartData.options.plugins.title = api_data.data.dataset;
+        this.chartData.data.labels = api_data.data.labels;        
         this.chartData.data.datasets[0].data = api_data.data.values;
         const ctx = document
           .getElementById("totaloffinishedgameschartpie")
