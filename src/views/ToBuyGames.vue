@@ -1,5 +1,7 @@
 <template>
-<div class="container py-4" style="margin-top:50px">
+<div class="all-content">
+  <Loading v-if="isLoading"></Loading>
+  <div class="container py-4" v-if="!isLoading" style="margin-top:50px">
     <div class="row align-items-start">
       <button type="button" class="btn btn-primary btn-lg btn-block" @click="toggleModal">Add a new Game</button>
     </div>
@@ -41,12 +43,14 @@
     </Modal>
   </div>
 </div>
+</div>  
 </template>
 
 <script>
 // @ is an alias to /src
 import ToBuyGamesTable from '@/components/ToBuyGamesTable.vue'
 import Modal from "@/components/Modal.vue";
+import Loading from "@/components/Loading.vue";
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
 import { useStore } from 'vuex';
@@ -56,7 +60,8 @@ export default {
   name: 'ToBuyGames',
   components: {
     ToBuyGamesTable,
-    Modal
+    Modal,
+    Loading
   },
   setup() {
     const store = useStore();
@@ -70,8 +75,14 @@ export default {
      const toast = useToast();
 
     return { modalActive, toggleModal, toast, store };
-  },data() {
+  }, mounted() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+  },
+  data() {
     return {      
+      isLoading: true, 
       newItem: {id: "", title: "", finished: null, fisical_disc: null, table: 'tobuy'}      
     }
   },

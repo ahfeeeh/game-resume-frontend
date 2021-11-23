@@ -28,6 +28,6 @@ export default {
 .img {
   position: relative;
   margin: auto;
-  margin-top: 20%;
+  margin-top: 0%;
 }
 </style>
