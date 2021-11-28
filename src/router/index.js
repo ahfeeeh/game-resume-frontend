@@ -82,6 +82,11 @@ const routes = [
     path: '/virtualconsole',
     name: 'VirtualConsoleGames',
     component: () => import('../views/VirtualConsoleGames.vue')
+  },
+  {
+    path: '/playing',
+    name: 'PlayingGames',
+    component: () => import('../views/PlayingGames.vue')
   }
 ]
 
