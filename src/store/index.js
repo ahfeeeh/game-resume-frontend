@@ -11,7 +11,7 @@ export default createStore({
     SAVE_GAMES(state, payload) {
       state.games = payload;
     },
-    SELECT_ITEM(state, payload) {
+    SELECT_ITEM(state, payload) {      
       state.selectedItem = state.games[payload];
       state.currentIdx = [payload]
     }
@@ -28,7 +28,7 @@ export default createStore({
     },
     finishGame(context, { payload, toast }) {
 
-      context.commit('SELECT_ITEM', payload.idx);      
+      context.commit('SELECT_ITEM', payload.idx);            
 
       let api_payload;
       if (payload.table === 'wiiu') {
@@ -89,6 +89,13 @@ export default createStore({
           idx: context.state.selectedItem.idx,
           finished: !context.state.selectedItem.finished
         }
+      } else if (payload.table === 'playing') {                
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.title,
+          idx: context.state.selectedItem.idx,
+          finished: !context.state.selectedItem.finished          
+        }        
       }
 
       axios.post('http://localhost:4000/finished', api_payload).then((resp) => {
@@ -152,7 +159,14 @@ export default createStore({
           title: context.state.selectedItem.title,
           idx: context.state.selectedItem.idx
         }
+      } else if (payload.table === 'playing') {        
+        api_payload = {
+          table: payload.table,
+          title: context.state.selectedItem.title,
+          idx: context.state.selectedItem.idx
+        }
       }
+
 
       axios.delete('http://localhost:4000/remove', { data: api_payload }).then((resp) => {
         if (resp) {
