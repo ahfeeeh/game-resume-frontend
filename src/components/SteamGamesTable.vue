@@ -19,6 +19,7 @@
         </td>
         <td>
           <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-danger btn-sm" @click="markAsPlaying(idx, getSelectedGame)"><i class="fas fa-play"></i> Mark as Playing</button> &nbsp;
             <button
               type="button"
               class="btn btn-success btn-sm"
@@ -191,6 +192,11 @@ export default {
       });
       toggleModal();
     },
+    markAsPlaying(idx, payload) {           
+      payload.table = 'playing'
+      payload.idx = idx      
+      this.store.dispatch('markAsPlaying', { payload, toast: this.toast })  
+    }
   },
   components: {
     Modal,

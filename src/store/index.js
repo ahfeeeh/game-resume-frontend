@@ -267,6 +267,26 @@ export default createStore({
       })
 
     },
+    markAsPlaying(context, { payload, toast }) {  
+      
+      context.commit('SELECT_ITEM', payload.idx);         
+
+      const api_payload = {
+        table: payload.table,
+        id: context.state.selectedItem.id || context.state.selectedItem.appid,
+        title: context.state.selectedItem.title
+      }
+
+      axios.post('http://localhost:4000/create', api_payload).then((resp) => {
+        if (resp) {
+          toast.success(`Success on Mark as Playing ${api_payload.title}`)          
+        }
+      }).catch((rej) => {
+        console.error(rej)
+        toast.error("Game already marked as Playing");
+      })
+
+    },
   },
   modules: {
 

@@ -21,6 +21,7 @@
         <td>{{game.system}}</td>
         <td>
           <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-danger btn-sm" @click="markAsPlaying(idx, getSelectedGame)"><i class="fas fa-play"></i> Mark as Playing</button> &nbsp;
             <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
             <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
             <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
@@ -174,9 +175,15 @@ export default {
     deleteItem(idx, toggleModal) {
       this.store.dispatch('deleteGame', { payload:{idx, table: 'virtualconsole'}, toast: this.toast })  
       toggleModal();  
-    },editItem(payload) {
+    },
+    editItem(payload) {
       payload.table = 'virtualconsole'
       this.store.dispatch('updateGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
+    },
+    markAsPlaying(idx, payload) {           
+      payload.table = 'playing'
+      payload.idx = idx      
+      this.store.dispatch('markAsPlaying', { payload, toast: this.toast })  
     }
   }, 
   components: {
