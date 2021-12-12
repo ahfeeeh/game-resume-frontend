@@ -1,43 +1,58 @@
 <template>
-<div class="container py-4" style="margin-top:50px">
+  <div class="container py-4" style="margin-top: 50px">
     <h1>Games Resume</h1>
     <div class="row">
       <div class="col">
         <h6>Total of Games</h6>
-          <TotalsTable />
-        </div>
+        <TotalsTable :data="this.totals_data" />
+      </div>
       <div class="col">
         <h6>Total of Finished Games</h6>
-          <TotalsFinishedTable />
-        </div>      
+        <TotalsFinishedTable :data="this.finished_data" />
+      </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
-import TotalsTable from '@/components/TotalsTable.vue'
-import TotalsFinishedTable from '@/components/TotalsFinishedTable.vue'
+import TotalsTable from "@/components/TotalsTable.vue";
+import TotalsFinishedTable from "@/components/TotalsFinishedTable.vue";
+import { request, gql } from "graphql-request";
+
+const query = gql`
+  query {
+    total_games: getStatisticsOfTotalGames {
+      description
+      total_games
+    }
+
+    finished_games: getStatisticsOfTotalFinishedGames {
+      description
+      total_games_finished
+    }
+  }
+`;
 
 export default {
   name: "GamesResume",
   components: {
     TotalsTable,
-    TotalsFinishedTable
+    TotalsFinishedTable,
   },
-  data(){
+  data() {
     return {
-      
-    }
-  },
-  setup() {
-
+      totals_data: [],
+      finished_data: [],
+    };
   },
   created() {
-    
-  }
+    request("http://localhost:4000/graphql", query).then((data) => {
+      this.totals_data = data.total_games;
+      this.finished_data = data.finished_games;
+    });
+  },
 };
 </script>
 
 <style scoped>
-
 </style>
