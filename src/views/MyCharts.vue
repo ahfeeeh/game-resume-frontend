@@ -13,31 +13,91 @@
       <div class="col">
         <TotalOfGamesChartPie />
       </div>
-      <div class="col">        
-        <TotalOfFinishedGamesChartPie /> 
+      <div class="col">
+        <TotalOfFinishedGamesChartPie />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { request, gql } from "graphql-request";
 import TotalOfGamesChart from "@/components/TotalOfGamesChart.vue";
 import TotalOfFinishedGamesChart from "@/components/TotalOfFinishedGamesChart.vue";
 import TotalOfGamesChartPie from "@/components/TotalOfGamesChartPie.vue";
 import TotalOfFinishedGamesChartPie from "@/components/TotalOfFinishedGamesChartPie.vue";
+
+const query = gql`
+  {
+    total_chart: getTotalChart {
+      stats {
+        system
+        total
+        percentual
+      }
+      labels
+      values
+      dataset
+    }
+    finished_chart: getFinishedChart {
+      stats {
+        system
+        total
+        percentual
+      }
+      labels
+      values
+      dataset
+    }
+    total_percent_chart: getTotalPercentChart {
+      stats {
+        system
+        total
+        percentual
+      }
+      labels
+      values
+      dataset
+    }
+    percent_finished_chart: getPercentFinishedChart {
+      stats {
+        system
+        total
+        percentual
+      }
+      labels
+      values
+      dataset
+    }
+  }
+`;
+
 export default {
   name: "MyCharts",
   components: {
     TotalOfGamesChart,
     TotalOfFinishedGamesChart,
-    TotalOfGamesChartPie,    
-    TotalOfFinishedGamesChartPie
+    TotalOfGamesChartPie,
+    TotalOfFinishedGamesChartPie,
   },
   data() {
-    return {};
+    return {
+      total_chart: {},
+      finished_chart: {},
+      total_percent_chart: {},
+      percent_finished_chart: {}      
+    };
   },
   setup() {},
-  created() {},
+  created() {
+    const vm = this;
+    request("http://localhost:4000/graphql", query).then((data) => {
+      vm.total_chart = data.total_chart;      
+      vm.finished_chart = data.finished_chart;
+      vm.total_percent_chart = data.total_percent_chart;
+      vm.percent_finished_chart = data.percent_finished_chart;      
+    });
+  },
 };
 </script>
 

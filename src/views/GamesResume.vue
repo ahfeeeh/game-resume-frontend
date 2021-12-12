@@ -42,13 +42,14 @@ export default {
   data() {
     return {
       totals_data: [],
-      finished_data: [],
+      finished_data: []      
     };
   },
   created() {
+    const vm = this;
     request("http://localhost:4000/graphql", query).then((data) => {
-      this.totals_data = data.total_games;
-      this.finished_data = data.finished_games;
+      vm.totals_data = data.total_games;
+      vm.finished_data = data.finished_games;
     });
   },
 };

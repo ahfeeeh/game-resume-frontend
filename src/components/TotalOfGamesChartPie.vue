@@ -60,8 +60,7 @@ export default {
       try {
         const api_data = await axios.get(
           "http://localhost:4000/charts?type=total_percent"
-        );
-        console.log(api_data);
+        );        
         this.chartData.data.labels = api_data.data.labels;
         this.chartData.data.datasets[0].label = api_data.data.dataset;
         this.chartData.data.datasets[0].data = api_data.data.values;        
