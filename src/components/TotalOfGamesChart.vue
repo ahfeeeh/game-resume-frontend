@@ -6,15 +6,19 @@
 
 <script>
 import { Chart, registerables } from "chart.js";
-import axios from "axios";
 
 Chart.register(...registerables);
 
 export default {
   name: "TotalOfGamesChart",
-  data() {
-    return {
-      chartData: {
+  props: {
+    labels: Array,
+    label: String,
+    values: Array,
+  },
+  computed: {
+    chartData: function () {
+      return {
         type: "line",
         options: {
           plugins: {
@@ -25,37 +29,25 @@ export default {
           },
         },
         data: {
-          labels: [],
+          labels: this.labels,
           datasets: [
             {
-              label: "",
-              data: [],
+              label: this.label,
+              data: this.values,
               fill: false,
               borderColor: "rgb(75, 192, 192)",
               tension: 0.1,
             },
           ],
         },
-      },
-    };
+      };
+    },
   },
-  async mounted() {
-    try {
-      setTimeout(async () => {
-        const api_data = await axios.get(
-          "http://localhost:4000/charts?type=total"
-        );
-        this.chartData.data.labels = api_data.data.labels;
-        this.chartData.data.datasets[0].label = api_data.data.dataset;
-        this.chartData.data.datasets[0].data = api_data.data.values;
-        const ctx = document
-          .getElementById("totalofgameschart")
-          .getContext("2d");
-        new Chart(ctx, this.chartData);
-      }, 500);
-    } catch (error) {
-      console.error(error);
-    }
+  mounted() {
+    const ctx = document.getElementById("totalofgameschart").getContext("2d");    
+    setTimeout(() => {
+      new Chart(ctx, this.chartData);
+    }, 2000);
   },
 };
 </script>

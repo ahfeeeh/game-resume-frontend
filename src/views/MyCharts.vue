@@ -3,15 +3,15 @@
     <h1>Charts</h1>
     <div class="row">
       <div class="col">
-        <TotalOfGamesChart />
+        <TotalOfGamesChart :labels="this.total_chart.labels" :label="this.total_chart.dataset" :values="this.total_chart.values" />
       </div>
       <div class="col">
-        <TotalOfFinishedGamesChart />
+        <TotalOfFinishedGamesChart :labels="this.finished_chart.labels" :label="this.finished_chart.dataset" :values="this.finished_chart.values" />
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <TotalOfGamesChartPie />
+        <TotalOfGamesChartPie :labels="this.total_percent_chart.labels" :label="this.total_percent_chart.dataset" :values="this.total_percent_chart.values" />
       </div>
       <div class="col">
         <TotalOfFinishedGamesChartPie />
