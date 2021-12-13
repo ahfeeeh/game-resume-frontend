@@ -5,7 +5,7 @@
           <a class="nav-link" @click="allFinishedGamesDetailed" style="cursor:pointer">Detailed List</a>          
         </nav>
   </div>  
-  <div class="container py-4" style="margin-top: 50px">
+  <div class="container py-4" style="margin-top: 10px">
     <div class="about">
       <h1>Finished Games Table</h1>
       <FinishedGamesTable :games="this.games" />
