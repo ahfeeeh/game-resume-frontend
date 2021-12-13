@@ -5,6 +5,8 @@
           <a class="nav-link" @click="goToPCGames" style="cursor:pointer">PC Games</a>
           <a class="nav-link" @click="goToConsoleGames" style="cursor:pointer">Console Games</a>
           <a class="nav-link" @click="goToPlayingGames" style="cursor:pointer">Playing</a>          
+          <a class="nav-link" @click="goToFinishedGames" style="cursor:pointer">Finished Games</a> 
+          <a class="nav-link" @click="goToUnfinishedGames" style="cursor:pointer">Unfinished Games</a> 
         </nav>
   </div>
   <div class="container py-4">
@@ -48,7 +50,13 @@ export default {
     },
     goToPlayingGames() {
       this.$router.push({ path: 'playing' })
-    }
+    },
+    goToFinishedGames() {
+      this.$router.push({ path: 'finished' })
+    },
+    goToUnfinishedGames() {
+      this.$router.push({ path: 'unfinished' })
+    },
   }
 };
 </script>

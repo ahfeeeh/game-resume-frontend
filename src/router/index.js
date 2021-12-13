@@ -87,6 +87,16 @@ const routes = [
     path: '/playing',
     name: 'PlayingGames',
     component: () => import('../views/PlayingGames.vue')
+  },
+  {
+    path: '/finished',
+    name: 'FinishedGames',
+    component: () => import('../views/FinishedGames.vue')
+  },
+  {
+    path: '/unfinished',
+    name: 'UnfinishedGames',
+    component: () => import('../views/UnfinishedGames.vue')
   }
 ]
 
