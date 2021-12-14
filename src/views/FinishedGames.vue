@@ -1,10 +1,82 @@
 <template>
-   <div class="nav-scroller bg-body shadow-sm" style="margin-top: 60px">
-        <nav class="nav nav-underline" aria-label="Secondary navigation">
-          <a class="nav-link active" aria-current="page" @click="allFinishedGames" style="cursor:pointer">Normal List</a>          
-          <a class="nav-link" @click="allFinishedGamesDetailed" style="cursor:pointer">Detailed List</a>          
-        </nav>
-  </div>  
+  <div class="nav-scroller bg-body shadow-sm" style="margin-top: 60px">
+    <nav class="nav nav-underline" aria-label="Secondary navigation">
+      <a
+        class="nav-link active"
+        aria-current="page"
+        @click="allFinishedGames"
+        style="cursor: pointer"
+        >Normal List</a
+      >
+      <a
+        class="nav-link"
+        @click="allFinishedGamesDetailed"
+        style="cursor: pointer"
+        >Detailed List</a
+      >
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          PC Games
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#"
+          @click="allFinishedGamesBySystem('Origin')"
+          >Origin</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"
+          @click="allFinishedGamesBySystem('Steam')"
+          >Steam</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"
+          @click="allFinishedGamesBySystem('Ubisoft')"
+          >Ubisoft</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Console Games
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#"
+          @click="allFinishedGamesBySystem('GameCube')"
+          >GameCube</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"
+          @click="allFinishedGamesBySystem('Wii')"
+          >Wii</a>
+          <div class="dropdown-divider"></div>
+          <a
+            class="dropdown-item"
+            href="#"
+            @click="allFinishedGamesBySystem('WiiU')"
+            >WiiU</a
+          >
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"
+          @click="allFinishedGamesBySystem('Virtual Console')"
+          >Virtual Console</a>
+        </div>
+      </li>
+    </nav>
+  </div>
   <div class="container py-4" style="margin-top: 10px">
     <div class="about">
       <h1>Finished Games Table</h1>
@@ -37,6 +109,16 @@ const queryAllFinishedDetailed = gql`
   }
 `;
 
+const queryFilterBySystem = gql`
+  query getGamesFinishedBySystem($system: String!) {
+    games: getFinishedBySystem(system: $system) {
+      title
+      system
+      finished
+    }
+  }
+`;
+
 export default {
   components: {
     FinishedGamesTable,
@@ -50,18 +132,26 @@ export default {
     allFinishedGames() {
       const vm = this;
       request("http://localhost:4000/graphql", queryAllFinished).then(
-        (data) => {          
-          vm.games = data.games;          
+        (data) => {
+          vm.games = data.games;
         }
       );
     },
     allFinishedGamesDetailed() {
       const vm = this;
       request("http://localhost:4000/graphql", queryAllFinishedDetailed).then(
-        (data) => {          
-          vm.games = data.games;          
+        (data) => {
+          vm.games = data.games;
         }
       );
+    },
+    allFinishedGamesBySystem(system) {
+      const vm = this;
+      request("http://localhost:4000/graphql", queryFilterBySystem, {
+        system,
+      }).then((data) => {
+        vm.games = data.games;
+      });
     },
   },
   created() {
