@@ -13,7 +13,7 @@
         <div class="col">
           <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=gamecube_games">to CSV</a> &nbsp;
           <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=gamecube">to PDF</a> &nbsp;
-          <a type="button" class="btn btn-outline-success">to XLS</a>
+          <a type="button" class="btn btn-outline-success" href="http://localhost:4000/xls?from=gamecube">to XLS</a>
         </div>
       </div>
     <div class="table-responsive">
