@@ -7,6 +7,15 @@
     </div>
   <div class="about">
     <h1>Wii Games Table</h1>
+     <div class="row align-items-end"  style="margin-top:20px">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=wii_games">to CSV</a> &nbsp;
+          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=wii">to PDF</a> &nbsp;
+          <a type="button" class="btn btn-outline-success">to XLS</a>
+        </div>
+      </div>
     <div class="table-responsive">
       <WiiGamesTable />
     </div>    
