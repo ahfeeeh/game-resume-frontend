@@ -11,8 +11,8 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col">
-          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=origin_games">to CSV</a> &nbsp;
-          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=origin">to PDF</a> &nbsp;
+          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=Origin">to CSV</a> &nbsp;
+          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=origin" target="_blank">to PDF</a> &nbsp;
           <a type="button" class="btn btn-outline-success" href="http://localhost:4000/xls?from=origin">to XLS</a>
         </div>
       </div>
@@ -26,9 +26,9 @@
         <template v-slot:modal-content>            
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">ID</span>
+                    <span class="input-group-text" id="basic-addon3">AppId</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.id">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.app_id">
             </div>
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
@@ -93,13 +93,13 @@ export default {
   data() {
     return {  
       isLoading: true,     
-      newItem: {id: "", title: "", finished: null, fisical_disc: null, table: 'origin'}      
+      newItem: {app_id: "", title: "", finished: null, fisical_disc: null, table: 'origin'}      
     }
   },
   methods: {
     saveGame(payload) {  
       this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
-      this.newItem = {id: "", title: "", finished: null, fisical_disc: null, table: 'origin'}            
+      this.newItem = {app_id: "", title: "", finished: null, fisical_disc: null, table: 'origin'}            
     }
   }
 }

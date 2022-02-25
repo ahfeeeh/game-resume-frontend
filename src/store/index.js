@@ -220,8 +220,8 @@ export default createStore({
         }
       } else if (payload.table === 'origin') {
         api_payload = {
-          idx: payload.idx,
           id: payload.id,
+          app_id: payload.app_id,
           title: payload.title,
           finished: payload.finished,
           table: payload.table

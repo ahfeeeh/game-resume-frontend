@@ -2,21 +2,22 @@
     <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th>Idx</th>
+        <th>AppId</th>
         <th>System</th>
         <th>Title</th>        
         <th>Finished ?</th>
         <th>Fisical Disc ?</th>
+        <th>Genuine ?</th>
       </tr>
     </thead>
     <tbody>  
       <tr v-for="game, idx in games" :key="idx">
-        <td>{{idx + 1 }}</td>
+        <td>{{game.app_id}}</td>
         <td>{{game.system}}</td>
         <td>{{game.title}}</td>            
         <td><input type="checkbox" v-model="game.finished" :disabled=true></td>        
         <td><input type="checkbox" v-model="game.fisical_disc" :disabled=true></td>
-        
+        <td><input type="checkbox" v-model="game.genuine" :disabled=true></td>
       </tr>
     </tbody>   
 </table>

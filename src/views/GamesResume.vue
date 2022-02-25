@@ -23,12 +23,12 @@ const query = gql`
   query {
     total_games: getStatisticsOfTotalGames {
       description
-      total_games
+      total_games: total
     }
 
     finished_games: getStatisticsOfTotalFinishedGames {
       description
-      total_games_finished
+      total_games_finished:total
     }
   }
 `;
