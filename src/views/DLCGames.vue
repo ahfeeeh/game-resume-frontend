@@ -17,9 +17,9 @@
         <template v-slot:modal-content>            
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">ID</span>
+                    <span class="input-group-text" id="basic-addon3">AppId</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.id">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.app_id">
             </div>
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
@@ -83,13 +83,13 @@ export default {
   data() {
     return {      
       isLoading: true, 
-      newItem: {id: "", title: "", finished: null, fisical_disc: null, table: 'dlcs'}      
+      newItem: {app_id: "", title: "", finished: null, fisical_disc: null, table: 'dlcs'}      
     }
   },
   methods: {
     saveGame(payload) {  
       this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
-      this.newItem = {id: "", title: "", finished: null, fisical_disc: null, table: 'dlcs'}            
+      this.newItem = {app_id: "", title: "", finished: null, fisical_disc: null, table: 'dlcs'}            
     }
   }
 }

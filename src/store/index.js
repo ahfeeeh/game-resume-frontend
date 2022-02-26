@@ -4,7 +4,7 @@ import axios from 'axios';
 export default createStore({
   state: {
     games: [],
-    selectedItem: { id: "", title: "", appid: -1, finished: null, fisical_disc: null },
+    selectedItem: { app_id: "", title: "", id: -1, finished: null, fisical_disc: null },
     currentIdx: -1
   },
   mutations: {
@@ -246,8 +246,8 @@ export default createStore({
         }
       } else if (payload.table === 'dlcs') {
         api_payload = {
-          idx: payload.idx,
           id: payload.id,
+          app_id: payload.app_id,
           title: payload.title,
           finished: payload.finished,
           table: payload.table
