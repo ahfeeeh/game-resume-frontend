@@ -2,7 +2,7 @@
     <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th>Idx</th>            
+        <th>Id</th>                          
         <th>Title</th>        
         <th>Finished ?</th>        
         <th>System</th>
@@ -11,7 +11,7 @@
     </thead>
     <tbody>  
       <tr v-for="game, idx in getGames" :key="idx">
-        <td>{{game.idx }}</td>        
+        <td>{{game.id }}</td>                        
         <td>{{game.title}}</td>              
         <td><input type="checkbox" v-model="game.finished" :disabled=true></td>   
         <td>{{game.system}}</td>

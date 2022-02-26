@@ -228,7 +228,7 @@ export default createStore({
         }
       } else if (payload.table === 'tobuy') {
         api_payload = {
-          idx: payload.idx,
+          id: payload.id,
           title: payload.title,
           finished: payload.finished,
           system: payload.system,
