@@ -121,6 +121,10 @@ export default {
       query: "",
     };
   },
+  created(){
+    this.query = this.$route.params.query;
+    console.log(this.$route)
+  },
   methods: {
     goToHome() {
       this.$router.push({ path: "/" });
