@@ -11,8 +11,8 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col">
-          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=wii_games">to CSV</a> &nbsp;
-          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=wii">to PDF</a> &nbsp;
+          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=Wii">to CSV</a> &nbsp;
+          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=wii" target="_blank">to PDF</a> &nbsp;
           <a type="button" class="btn btn-outline-success" href="http://localhost:4000/xls?from=wii">to XLS</a>
         </div>
       </div>
@@ -26,9 +26,9 @@
         <template v-slot:modal-content>            
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">ID</span>
+                    <span class="input-group-text" id="basic-addon3">AppId</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.id">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.app_id">
             </div>
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
@@ -102,13 +102,16 @@ export default {
   data() {
     return {      
       isLoading: true,
-      newItem: {id: "", title: "", finished: null, fisical_disc: null, table: 'wii'}      
+      newItem: {app_id: "", title: "", finished: null, fisical_disc: null, collection: null, genuine:null, table: 'wii'}      
     }
   },
   methods: {
     saveGame(payload) {  
+      /*FIX ME*/
+      payload.collection = false;
+      payload.genuine = false;
       this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
-      this.newItem = {id: "", title: "", finished: null, fisical_disc: null, table: 'wii'}            
+      this.newItem = {app_id: "", title: "", finished: null, fisical_disc: null, collection: null, genuine:null, table: 'wii'}            
     }
   }
 }

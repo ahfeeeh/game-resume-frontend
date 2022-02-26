@@ -185,8 +185,8 @@ export default createStore({
 
       if (payload.table === 'wiiu') {
         api_payload = {
-          idx: payload.idx,
           id: payload.id,
+          app_id: payload.app_id,
           title: payload.title,
           finished: payload.finished,
           fisical_disc: payload.fisical_disc,
@@ -194,8 +194,8 @@ export default createStore({
         }
       } else if (payload.table === 'wii') {
         api_payload = {
-          idx: payload.idx,
           id: payload.id,
+          app_id: payload.app_id,
           title: payload.title,
           finished: payload.finished,
           fisical_disc: payload['fisical_disc'],
@@ -203,8 +203,8 @@ export default createStore({
         }
       } else if (payload.table === 'gamecube') {
         api_payload = {
-          idx: payload.idx,
           id: payload.id,
+          app_id: payload.app_id,
           title: payload.title,
           finished: payload.finished,
           fisical_disc: payload['fisical_disc'],

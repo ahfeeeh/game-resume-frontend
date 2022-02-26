@@ -2,8 +2,8 @@
     <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th>Idx</th>
-        <th>ID</th>
+        <th>Id</th>
+        <th>AppId</th>
         <!--<th>Size(GB)</th>-->
         <th>Title</th>
         <!-- <th>Type</th> -->        
@@ -14,8 +14,8 @@
     </thead>
     <tbody>  
       <tr v-for="game, idx in getGames" :key="idx">
-        <td>{{game.idx }}</td>
-        <td>{{game.id}}</td>
+        <td>{{game.id }}</td>
+        <td>{{game.app_id}}</td>
         <!--<td>{{game['size_gb']}}</td>-->
         <td>{{game.title}}</td>      
         <!--<td>{{game.iso_type}}</td>  -->
@@ -39,9 +39,9 @@
         <template v-slot:modal-content>            
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3" >ID</span>
+                    <span class="input-group-text" id="basic-addon3" >AppId</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.id">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.app_id">
             </div>
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
