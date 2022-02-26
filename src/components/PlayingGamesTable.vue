@@ -2,8 +2,8 @@
     <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th>Idx</th>
-        <th>ID</th>
+        <th>Id</th>
+        <th>AppId</th>
         <th>Title</th>      
         <th>Started At </th>  
         <th>Finished ?</th>
@@ -14,8 +14,8 @@
     </thead>
     <tbody>  
       <tr v-for="game, idx in getGames" :key="idx">
-        <td>{{game.idx }}</td>
         <td>{{game.id }}</td>
+        <td>{{game.app_id }}</td>
         <td>{{game.title}}</td>    
         <td>{{game.started_at}}</td>        
         <td><input type="checkbox" v-model="game.finished" :disabled=true></td>                

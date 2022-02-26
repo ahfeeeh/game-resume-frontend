@@ -6,8 +6,8 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col">
-          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=steam_games">to CSV</a> &nbsp;
-          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=steam">to PDF</a> &nbsp;
+          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=Steam">to CSV</a> &nbsp;
+          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=steam" target="_blank">to PDF</a> &nbsp;
           <a type="button" class="btn btn-outline-success" href="http://localhost:4000/xls?from=steam">to XLS</a>
         </div>
       </div>

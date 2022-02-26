@@ -2,8 +2,8 @@
   <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th>Idx</th>
-        <th>AppID</th>
+        <th>Id</th>
+        <th>AppId</th>
         <th>Title</th>
         <th>Finished ?</th>
         <th>Actions</th>
@@ -11,8 +11,8 @@
     </thead>
     <tbody>
       <tr v-for="(game, idx) in getGames" :key="idx">
-        <td>{{ game.idx }}</td>
-        <td>{{ game.appid }}</td>
+        <td>{{ game.id }}</td>
+        <td>{{ game.app_id }}</td>
         <td>{{ game.title }}</td>
         <td>
           <input type="checkbox" v-model="game.finished" :disabled="true" />
@@ -32,7 +32,7 @@
               type="button"
               class="btn btn-info btn-sm"
               style="color: white"
-              @click="toggleModalDLC(game.appid, this)"
+              @click="toggleModalDLC(game.app_id, this)"
             >
               <i class="fa fa-puzzle-piece"></i> DLC
             </button>
@@ -65,17 +65,17 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Idx</th>
             <th scope="col">Id</th>
+            <th scope="col">AppId</th>
             <th scope="col">Title</th>
             <th scope="col">Finished</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="dlc in dlcs" :key="dlc.idx">
-            <th scope="row">{{ dlc.idx }}</th>
-            <td>{{ dlc.id }}</td>
+          <tr v-for="dlc in dlcs" :key="dlc.id">
+            <th scope="row">{{ dlc.id }}</th>
+            <td>{{ dlc.app_id }}</td>
             <td>{{ dlc.title }}</td>
             <td>
               <input type="checkbox" v-model="dlc.finished" :disabled="true" />
@@ -84,7 +84,7 @@
               <button
                 type="button"
                 class="btn btn-success btn-sm"
-                @click="markDlcAsFinished(dlc.idx, dlc.id, !dlc.finished, this)"
+                @click="markDlcAsFinished(dlc.id, dlc.app_id, !dlc.finished, this)"
               >
                 <i class="fas fa-check"></i> Mark as Finished
               </button>
@@ -132,9 +132,9 @@ export default {
 
         const query = gql`
           {
-            dlcs: getDLC(id: "${id}") {
-              idx
+            dlcs: getDLC(app_id: "${id}") {
               id
+              app_id
               title
               finished
             }
@@ -153,7 +153,7 @@ export default {
       console.log("Mark dlc as finished idx: ", idx);
       console.log("id:", id);
       console.log("finished: ", finished);
-      const api_payload = { id, idx, finished };
+      const api_payload = { app_id: id, id: idx, finished };
       axios
         .post("http://localhost:4000/dlc_finished", api_payload)
         .then((resp) => {

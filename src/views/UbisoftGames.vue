@@ -11,8 +11,8 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col">
-          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=ubisoft_games">to CSV</a> &nbsp;
-          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=ubisoft">to PDF</a> &nbsp;
+          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=Ubisoft">to CSV</a> &nbsp;
+          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=ubisoft" target="_blank">to PDF</a> &nbsp;
           <a type="button" class="btn btn-outline-success" href="http://localhost:4000/xls?from=ubisoft">to XLS</a>
         </div>
       </div>
@@ -29,6 +29,12 @@
                     <span class="input-group-text" id="basic-addon3">ID</span>
                 </div>
                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.id">
+            </div>
+            <div class="input-group mb-3  input-group-md">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">AppId</span>
+                </div>
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.app_id">
             </div>
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
@@ -94,13 +100,13 @@ export default {
   data() {
     return {  
       isLoading: true,    
-      newItem: {id: "", title: "", finished: null, fisical_disc: null, table: 'ubisoft'}      
+      newItem: {app_id: "", title: "", finished: null, fisical_disc: null, table: 'ubisoft'}      
     }
   },
   methods: {
     saveGame(payload) {  
       this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
-      this.newItem = {id: "", title: "", finished: null, fisical_disc: null, table: 'ubisoft'}            
+      this.newItem = {app_id: "", title: "", finished: null, fisical_disc: null, table: 'ubisoft'}            
     }
   }
 }

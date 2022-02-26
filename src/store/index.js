@@ -65,7 +65,7 @@ export default createStore({
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
-          appid: context.state.selectedItem.appid,
+          app_id: context.state.selectedItem.app_id,
           finished: !context.state.selectedItem.finished
         }
       } else if (payload.table === 'tobuy') {
@@ -157,7 +157,7 @@ export default createStore({
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
-          idx: context.state.selectedItem.idx
+          id: context.state.selectedItem.id
         }
       } else if (payload.table === 'playing') {        
         api_payload = {
@@ -212,8 +212,8 @@ export default createStore({
         }
       } else if (payload.table === 'ubisoft') {
         api_payload = {
-          idx: payload.idx,
           id: payload.id,
+          app_id: payload.app_id,
           title: payload.title,
           finished: payload.finished,
           table: payload.table
@@ -287,7 +287,7 @@ export default createStore({
 
       const api_payload = {
         table: payload.table,
-        id: context.state.selectedItem.id || context.state.selectedItem.appid,
+        id: context.state.selectedItem.id || context.state.selectedItem.app_id,
         title: context.state.selectedItem.title
       }
 
