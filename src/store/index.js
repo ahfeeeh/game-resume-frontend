@@ -93,7 +93,7 @@ export default createStore({
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
-          idx: context.state.selectedItem.idx,
+          id: context.state.selectedItem.id,
           finished: !context.state.selectedItem.finished          
         }        
       }
@@ -118,40 +118,45 @@ export default createStore({
       if (payload.table === 'wiiu') {
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.title
+          title: context.state.selectedItem.title,
+          id: context.state.selectedItem.id
         }
       } else if (payload.table === 'wii') {
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.title
+          title: context.state.selectedItem.title,
+          id: context.state.selectedItem.id
         }
       } else if (payload.table === 'gamecube') {
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.title
+          title: context.state.selectedItem.title,
+          id: context.state.selectedItem.id
         }
       }
       else if (payload.table === 'ubisoft') {
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.title
+          title: context.state.selectedItem.title,
+          id: context.state.selectedItem.id
         }
       } else if (payload.table === 'origin') {
         api_payload = {
           table: payload.table,
-          title: context.state.selectedItem.title
+          title: context.state.selectedItem.title,
+          id: context.state.selectedItem.id
         }
       } else if (payload.table === 'tobuy') {
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
-          idx: context.state.selectedItem.idx
+          id: context.state.selectedItem.id
         }
       } else if (payload.table === 'virtualconsole') {
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
-          idx: context.state.selectedItem.idx
+          id: context.state.selectedItem.id
         }
       } else if (payload.table === 'dlcs') {
         api_payload = {
@@ -163,7 +168,7 @@ export default createStore({
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
-          idx: context.state.selectedItem.idx
+          id: context.state.selectedItem.id
         }
       }
 
@@ -283,11 +288,12 @@ export default createStore({
     },
     markAsPlaying(context, { payload, toast }) {  
       
-      context.commit('SELECT_ITEM', payload.idx);         
+      context.commit('SELECT_ITEM', payload.idx);       
 
       const api_payload = {
         table: payload.table,
-        id: context.state.selectedItem.id || context.state.selectedItem.app_id,
+        id: context.state.selectedItem.id,
+        app_id: context.state.selectedItem.app_id,
         title: context.state.selectedItem.title
       }
 

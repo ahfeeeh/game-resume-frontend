@@ -71,7 +71,7 @@
           >
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#"
-          @click="allFinishedGamesBySystem('Virtual Console')"
+          @click="allFinishedGamesBySystem('VC')"
           >Virtual Console</a>
         </div>
       </li>
