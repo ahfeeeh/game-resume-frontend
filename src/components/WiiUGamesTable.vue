@@ -7,6 +7,8 @@
         <th>AppId</th>
         <th>Title</th>
         <th>Finished ?</th>
+        <th>Genuine ?</th>
+        <th>Collection ?</th>
         <th>Fisical Disc ?</th>
         <th>Actions</th>
       </tr>
@@ -17,9 +19,9 @@
         <td><img :src="`http://localhost:4000/${game.app_id}.jpg`" class="img-fluid img-thumbnail"></td>
         <td>{{ game.app_id }}</td>
         <td>{{ game.title }}</td>
-        <td>
-          <input type="checkbox" v-model="game.finished" :disabled="true" />
-        </td>
+        <td> <input type="checkbox" v-model="game.finished" :disabled="true" /> </td>
+        <td> <input type="checkbox" v-model="game.genuine" :disabled="true" /> </td>
+        <td> <input type="checkbox" v-model="game.collection" :disabled="true" /> </td>
         <td>
           <input type="checkbox" v-model="game.fisical_disc" :disabled="true" />
         </td>
@@ -35,6 +37,7 @@
             </button>
             &nbsp;
             <button
+              :disabled="!game.has_dlc"
               type="button"
               class="btn btn-info btn-sm"
               style="color: white"
