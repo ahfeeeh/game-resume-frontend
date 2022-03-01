@@ -36,6 +36,8 @@
               <li><a class="dropdown-item"  aria-current="page" style="cursor: pointer" @click="goToResume">Resume</a></li>   
               <li><hr class="dropdown-divider" /></li>
               <li><a class="dropdown-item"  aria-current="page" style="cursor: pointer" @click="goToCharts">Charts</a></li>                 
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item"  aria-current="page" style="cursor: pointer" @click="goToGenres">Genres</a></li>                 
             </ul>
           </li>
         
@@ -157,6 +159,9 @@ export default {
     },
     goToResume() {
       this.$router.push({ path: "resume" });
+    },
+    goToGenres() {
+      this.$router.push({ path: "genres" });
     },
     goToToBuyGames(){
       this.$router.push({ path: "tobuy" });

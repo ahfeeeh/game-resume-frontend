@@ -58,6 +58,11 @@ const routes = [
     component: () => import('../views/MyCharts.vue')
   },
   {
+    path: '/genres',
+    name: 'Genres',
+    component: () => import('../views/GenresResume.vue')
+  },
+  {
     path: '/search/:query',
     name: 'Search',    
     component: () => import('../views/Search.vue'),
