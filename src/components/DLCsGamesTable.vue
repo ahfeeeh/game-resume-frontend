@@ -3,7 +3,8 @@
     <thead>
       <tr>
         <th>Id</th>
-        <th>AppId</th>        
+        <th>AppId</th>       
+        <th>System</th> 
         <th>Title</th>        
         <th>Finished ?</th>        
         <th>Actions</th>
@@ -13,6 +14,7 @@
       <tr v-for="game, idx in getGames" :key="idx">
         <td>{{game.id }}</td>
         <td>{{game.app_id}}</td>        
+        <td>{{game.system}}</td>        
         <td>{{game.title}}</td>              
         <td><input type="checkbox" v-model="game.finished" :disabled=true></td>           
         <td>
