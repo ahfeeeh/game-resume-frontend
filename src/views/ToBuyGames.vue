@@ -35,6 +35,13 @@
                 </div>
                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.system">
             </div>
+            
+            <div class="input-group mb-3  input-group-md">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">Magnetic Link</span>
+                </div>
+                <textarea class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.magnetic_link" />
+            </div>
 
         </template>
         <template v-slot:modal-footer>
@@ -83,13 +90,13 @@ export default {
   data() {
     return {      
       isLoading: true, 
-      newItem: {id: "", title: "", finished: null, fisical_disc: null, table: 'tobuy'}      
+      newItem: {id: "", title: "", finished: null, fisical_disc: null, magnetic_link: "", table: 'tobuy'}      
     }
   },
   methods: {
     saveGame(payload) {  
       this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
-      this.newItem = {id: "", title: "", finished: null, fisical_disc: null, table: 'tobuy'}            
+      this.newItem = {id: "", title: "", finished: null, fisical_disc: null, magnetic_link: "", table: 'tobuy'}            
     }
   }
 }

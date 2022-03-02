@@ -19,7 +19,8 @@
           <div class="btn-group btn-group-sm" role="group">
             <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
             <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>  &nbsp;
+            <a v-if="game.magnetic_link" class="btn btn-success btn-sm" :href="game.magnetic_link"><i class="fas fa-download"></i> Download</a>
           </div>          
         </td>
       </tr>
@@ -49,6 +50,12 @@
                     <span class="input-group-text" id="basic-addon3">System</span>
                 </div>
                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.system">
+            </div>
+            <div class="input-group mb-3  input-group-md">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">Magnetic Link</span>
+                </div>
+                <textarea class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.magnetic_link" />
             </div>
             
         </template>

@@ -237,7 +237,8 @@ export default createStore({
           title: payload.title,
           finished: payload.finished,
           system: payload.system,
-          table: payload.table
+          table: payload.table,
+          magnetic_link: payload.magnetic_link
         }
       } else if (payload.table === 'virtualconsole') {
         api_payload = {
