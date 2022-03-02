@@ -63,6 +63,17 @@ const routes = [
     component: () => import('../views/GenresResume.vue')
   },
   {
+    path: '/gamesbygenres',
+    name: 'GamesByGenres',
+    component: () => import('../views/GamesByGenres.vue')
+  },
+  {
+    path: '/genre/:query',
+    name: 'Genre Search',    
+    component: () => import('../views/GamesByGenreSearch.vue'),
+    props: true    
+  },
+  {
     path: '/search/:query',
     name: 'Search',    
     component: () => import('../views/Search.vue'),

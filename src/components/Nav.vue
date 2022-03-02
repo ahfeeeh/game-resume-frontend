@@ -93,7 +93,9 @@
             </ul>
           </li>
           
-          
+             <li class="nav-item">
+               <a class="nav-link" aria-current="page" style="cursor: pointer" @click="goToGamesByGenre">Games By Genre</a>
+            </li>  
           
         </ul>
         <form class="d-flex">
@@ -171,6 +173,9 @@ export default {
     },
     goToCharts(){
       this.$router.push({ path: "charts" });
+    },
+    goToGamesByGenre(){
+      this.$router.push({ path: "gamesbygenres" });
     }
   },
   mounted() {
