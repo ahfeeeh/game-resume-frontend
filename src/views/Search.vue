@@ -40,6 +40,7 @@ export default {
       // react to route changes...
       console.log(to, from)
       this.route = to.params.query
+      this.searchGames(this.route);      
     }
   },
   components: {
