@@ -175,7 +175,7 @@
       </button>
     </template>
   </Modal>
-  <Modal @close="toggleModalDLC(-1, this)" :modalActive="modalActiveDLC">
+  <Modal @close="toggleModalDLC('', this)" :modalActive="modalActiveDLC">
     <template v-slot:modal-header> DLC </template>
 
     <template v-slot:modal-content>

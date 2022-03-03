@@ -45,7 +45,7 @@
       </button>
     </template>
   </Modal>
-  <Modal @close="toggleModalDLC(-1, this)" :modalActive="modalActiveDLC">
+  <Modal @close="toggleModalDLC('', this)" :modalActive="modalActiveDLC">
     <template v-slot:modal-header> DLC </template>
 
     <template v-slot:modal-content>
@@ -140,10 +140,10 @@ export default {
       console.log("Mark dlc as finished idx: ", idx);
       console.log("id:", id);
       console.log("finished: ", finished);
-      const api_payload = { app_id: id, id: idx, finished };
+      const api_payload = { app_id: id, id: idx, finished };      
       axios
         .post("http://localhost:4000/dlc_finished", api_payload)
-        .then((resp) => {
+        .then((resp) => {          
           context.dlcs = resp.data.dlcs;
           toast.success(`Success on Mark as Finished from Database`);
         })
