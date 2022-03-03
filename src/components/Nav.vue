@@ -94,7 +94,7 @@
           </li>
           
              <li class="nav-item">
-               <router-link to="/virtualconsole" class="nav-link">Games By Genre</router-link>               
+               <router-link to="/gamesbygenres" class="nav-link">Games By Genre</router-link>               
             </li>  
           
         </ul>

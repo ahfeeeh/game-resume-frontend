@@ -11,7 +11,7 @@
       <tbody>
         <tr v-for="(d, idx) in data" :key="idx">
           <th scope="row">{{ idx }}</th>
-          <td><a :href="`http://localhost:8080/genre/${d.genre}`">{{ d.genre }}</a></td>
+          <td><a :href="`http://localhost:8080/genre/${d.genre}`" class="link-secondary">{{ d.genre }}</a></td>
           <td>{{ d.total }}</td>
         </tr>
       </tbody>
