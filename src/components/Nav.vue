@@ -2,8 +2,8 @@
 
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"
     aria-label="Main navigation">
-    <div class="container-fluid">
-      <a class="navbar-brand" @click="goToHome" style="cursor: pointer">My Games Resume</a>
+    <div class="container-fluid">      
+      <router-link to="/" class="navbar-brand">My Games Resume</router-link>
       <button
         class="navbar-toggler p-0 border-0"
         type="button"
@@ -17,8 +17,8 @@
         id="navbarsExampleDefault">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <li class="nav-item">
-            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToHome">Home</a>
+          <li class="nav-item">            
+            <router-link to="/" class="nav-link">Home</router-link>
           </li>          
 
           <li class="nav-item dropdown">
@@ -33,21 +33,21 @@
               Stats
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item"  aria-current="page" style="cursor: pointer" @click="goToResume">Resume</a></li>   
+              <li><router-link to="/resume" class="dropdown-item">Resume</router-link></li>   
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item"  aria-current="page" style="cursor: pointer" @click="goToCharts">Charts</a></li>                 
+              <li><router-link to="/charts" class="dropdown-item">Charts</router-link></li>                 
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item"  aria-current="page" style="cursor: pointer" @click="goToGenres">Genres</a></li>                 
+              <li><router-link to="/genres" class="dropdown-item">Genres</router-link></li>                 
             </ul>
           </li>
         
 
           <li class="nav-item">
-            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToToBuyGames">To Buy Games</a>
+            <router-link to="/tobuy" class="nav-link">To Buy Games</router-link>            
           </li>   
 
           <li class="nav-item">
-            <a class="nav-link"  aria-current="page" style="cursor: pointer" @click="goToDLCGames">DLC Games</a>
+            <router-link to="/dlcs" class="nav-link">DLC Games</router-link>            
           </li>   
 
 
@@ -63,11 +63,11 @@
               PC Games
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" style="cursor: pointer" @click="goToOriginGames">Origin Games</a></li>
+              <li><router-link to="/origin" class="dropdown-item">Origin Games</router-link></li>
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" style="cursor: pointer" @click="goToSteamGames">Steam Games</a></li>
+              <li><router-link to="/steam" class="dropdown-item">Steam Games</router-link></li>
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" style="cursor: pointer" @click="goToUbisoftGames">Ubisoft Games</a></li>
+              <li><router-link to="/ubisoft" class="dropdown-item">Ubisoft Games</router-link></li>
             </ul>
           </li>
 
@@ -83,18 +83,18 @@
               Console Games
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" style="cursor: pointer" @click="goToGameCubeGames">GameCube Games</a></li>
+              <li><router-link to="/gamecube" class="dropdown-item">GameCube Games</router-link></li>
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" style="cursor: pointer" @click="goToWiiGames">Wii Games</a></li>
+              <li><router-link to="/wii" class="dropdown-item">Wii Games</router-link></li>
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" style="cursor: pointer" @click="goToWiiUGames">WiiU Games</a></li>
+              <li><router-link to="/wiiu" class="dropdown-item">WiiU Games</router-link></li>
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" style="cursor: pointer" @click="goToVirtualConsoleGames">Virtual Console Games</a></li>
+              <li><router-link to="/virtualconsole" class="dropdown-item">Virtual Console Games</router-link></li>
             </ul>
           </li>
           
              <li class="nav-item">
-               <a class="nav-link" aria-current="page" style="cursor: pointer" @click="goToGamesByGenre">Games By Genre</a>
+               <router-link to="/virtualconsole" class="nav-link">Games By Genre</router-link>               
             </li>  
           
         </ul>
