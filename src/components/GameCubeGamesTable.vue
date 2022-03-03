@@ -1,4 +1,14 @@
 <template>
+  <br />
+  <br />
+  <br />
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Search</span>
+    </div>
+    <input type="text" class="form-control" placeholder="Input Game Name" aria-label="Search" aria-describedby="basic-addon1" v-model="searchQuery">
+  </div>
+ 
     <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -13,7 +23,7 @@
       </tr>
     </thead>
     <tbody>  
-      <tr v-for="game, idx in getGames" :key="idx">
+      <tr v-for="game, idx in resultQuery" :key="idx">
         <td>{{game.id }}</td>
         <td>{{game.app_id}}</td>
         <!--<td>{{game['size_gb']}}</td>-->
@@ -152,8 +162,16 @@ export default {
       modalActiveDelete,modalActiveFinished, 
       toggleModalDelete,toggleModalFinished, store }
     },
-  data() { return {} },
-  computed: mapGetters(['getGames', 'getSelectedGame', 'getCurrentIdx']),
+  data() { return {searchQuery: null} },
+  computed: {resultQuery() {
+    if(this.searchQuery){
+      return this.getGames.filter((item)=>{        
+        return this.searchQuery.toLowerCase().split(' ').every(v => item.title.toLowerCase().includes(v))
+      })
+      }else{
+        return this.getGames;
+      }
+  }, ...mapGetters(['getGames', 'getSelectedGame', 'getCurrentIdx']),}, 
   created() {},
   mounted() {
     this.getItems();        
