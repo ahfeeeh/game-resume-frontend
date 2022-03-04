@@ -14,13 +14,13 @@
         <td>{{game.id }}</td>
         <td>{{game.app_id }}</td>
         <td>{{game.title}}</td>            
-        <td><input type="checkbox" v-model="game.finished" :disabled=true></td>        
+        <td><input type="checkbox" v-model="game.finished" :disabled="true"></td>        
         <td>
           <div class="btn-group btn-group-sm" role="group">
-              <button type="button" class="btn btn-danger btn-sm" @click="markAsPlaying(idx, getSelectedGame)"><i class="fas fa-play"></i> Mark as Playing</button> &nbsp;
-              <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
-              <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-              <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
+              <button type="button" class="btn btn-danger btn-sm" @click="markAsPlaying(game.app_id || game.id, getSelectedGame)"><i class="fas fa-play"></i> Mark as Playing</button> &nbsp;
+              <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(game.app_id || game.id)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+              <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(game.app_id || game.id)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+              <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(game.app_id || game.id)"><i class="fas fa-trash-alt"></i> Delete</button>
           </div>          
         </td>
       </tr>
@@ -154,11 +154,11 @@ export default {
       this.store.dispatch('getGames', { payload:{table: 'ubisoft'}, toast: this.toast })
     },
     finishItem(idx, toggleModal) {            
-      this.store.dispatch('finishGame', { payload:{idx, table: 'ubisoft'}, toast: this.toast })
+      this.store.dispatch('finishGame', { payload:{idx:idx[0], table: 'ubisoft'}, toast: this.toast })
       toggleModal();   
     },
     deleteItem(idx, toggleModal) {
-      this.store.dispatch('deleteGame', { payload:{idx, table: 'ubisoft'}, toast: this.toast })  
+      this.store.dispatch('deleteGame', { payload:{idx:idx[0], table: 'ubisoft'}, toast: this.toast })  
       toggleModal();  
     },
     editItem(payload) {

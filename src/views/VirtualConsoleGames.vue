@@ -47,6 +47,15 @@
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Finished?">
             </div>
 
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="newItem.genuine">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Genuine?">
+            </div>
+
              <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3">Platform</span>
@@ -110,13 +119,13 @@ export default {
   data() {
     return {   
       isLoading: true,   
-      newItem: {app_id: "", title: "", finished: null, fisical_disc: null, table: 'virtualconsole'}      
+      newItem: {app_id: "", title: "", finished: null, fisical_disc: null, genuine:null, table: 'virtualconsole'}      
     }
   },
   methods: {
     saveGame(payload) {  
       this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
-      this.newItem = {app_id: "", title: "", finished: null, fisical_disc: null, table: 'virtualconsole'}            
+      this.newItem = {app_id: "", title: "", finished: null, fisical_disc: null, genuine: null, table: 'virtualconsole'}            
     }
   }
 }

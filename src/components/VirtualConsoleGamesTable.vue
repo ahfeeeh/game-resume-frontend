@@ -21,10 +21,10 @@
         <td>{{game.system}}</td>
         <td>
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-danger btn-sm" @click="markAsPlaying(idx, getSelectedGame)"><i class="fas fa-play"></i> Mark as Playing</button> &nbsp;
-            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
-            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button type="button" class="btn btn-danger btn-sm" @click="markAsPlaying(game.app_id || game.id, getSelectedGame)"><i class="fas fa-play"></i> Mark as Playing</button> &nbsp;
+            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(game.app_id || game.id)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(game.app_id || game.id)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(game.app_id || game.id)"><i class="fas fa-trash-alt"></i> Delete</button>
           </div>          
         </td>
       </tr>
@@ -57,12 +57,21 @@
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Finished?">
             </div>
+
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="getSelectedGame.genuine">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Genuine?">
+            </div>
             
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Console</span>
+                    <span class="input-group-text" id="basic-addon3">Platform</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.console">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.platform">
             </div>
             
             <div class="input-group mb-3  input-group-md">
@@ -169,11 +178,11 @@ export default {
       this.store.dispatch('getGames', { payload:{table: 'virtualconsole'}, toast: this.toast })
     },
     finishItem(idx, toggleModal) {                  
-      this.store.dispatch('finishGame', { payload:{idx, table: 'virtualconsole'}, toast: this.toast })
+      this.store.dispatch('finishGame', { payload:{idx:idx[0], table: 'virtualconsole'}, toast: this.toast })
       toggleModal();   
     },
     deleteItem(idx, toggleModal) {
-      this.store.dispatch('deleteGame', { payload:{idx, table: 'virtualconsole'}, toast: this.toast })  
+      this.store.dispatch('deleteGame', { payload:{idx:idx[0], table: 'virtualconsole'}, toast: this.toast })  
       toggleModal();  
     },
     editItem(payload) {
