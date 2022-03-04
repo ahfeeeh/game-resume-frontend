@@ -1,5 +1,5 @@
 <template>
-<!--
+
   <br />
   <br />
   <br />
@@ -9,7 +9,7 @@
     </div>
     <input type="text" class="form-control" placeholder="Input Game Name" aria-label="Search" aria-describedby="basic-addon1" v-model="searchQuery">
   </div>
- --> 
+
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -25,7 +25,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(game, idx) in getGames" :key="idx">
+      <tr v-for="(game, idx) in resultQuery" :key="idx">
         <td>{{ game.id }}</td>
         <td><img :src="`http://localhost:4000/${game.app_id}.jpg`" class="img-fluid img-thumbnail"></td>
         <td>{{ game.app_id }}</td>
@@ -38,11 +38,11 @@
         </td>
         <td>
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-danger btn-sm" @click="markAsPlaying(idx, getSelectedGame)"><i class="fas fa-play"></i> Mark as Playing</button> &nbsp;
-            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)" ><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+            <button type="button" class="btn btn-danger btn-sm" @click="markAsPlaying(game.app_id || game.id, getSelectedGame)"><i class="fas fa-play"></i> Mark as Playing</button> &nbsp;
+            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(game.app_id || game.id)" ><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
             <button :disabled="!game.has_dlc" type="button" class="btn btn-info btn-sm" style="color: white" @click="toggleModalDLC(game.app_id, this)"><i class="fa fa-puzzle-piece"></i> DLC</button> &nbsp;
-            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(game.app_id || game.id)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(game.app_id || game.id)"><i class="fas fa-trash-alt"></i> Delete</button>
           </div>
         </td>
       </tr>
@@ -300,7 +300,7 @@ export default {
     };
   },
   computed: {resultQuery() {
-    if(this.searchQuery){
+    if(this.searchQuery){      
       return this.getGames.filter((item)=>{        
         return this.searchQuery.toLowerCase().split(' ').every(v => item.title.toLowerCase().includes(v))
       })
@@ -322,14 +322,14 @@ export default {
     },
     finishItem(idx, toggleModal) {
       this.store.dispatch("finishGame", {
-        payload: { idx, table: "wiiu" },
+        payload: { idx:idx[0], table: "wiiu" },
         toast: this.toast,
       });
       toggleModal();
     },
     deleteItem(idx, toggleModal) {
       this.store.dispatch("deleteGame", {
-        payload: { idx, table: "wiiu" },
+        payload: { idx:idx[0], table: "wiiu" },
         toast: this.toast,
       });
       toggleModal();

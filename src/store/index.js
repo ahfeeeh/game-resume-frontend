@@ -3,16 +3,19 @@ import axios from 'axios';
 
 export default createStore({
   state: {
+    hashMap: new Map(),
     games: [],
-    selectedItem: { app_id: "", title: "", id: -1, finished: null, fisical_disc: null },
+    selectedItem: {},
     currentIdx: -1
   },
   mutations: {
     SAVE_GAMES(state, payload) {
-      state.games = payload;
+      state.hashMap = new Map()
+      payload.forEach(game=> state.hashMap.set(game.app_id || game.id , game))      
+      state.games = Array.from(state.hashMap.values());      
     },
     SELECT_ITEM(state, payload) {      
-      state.selectedItem = state.games[payload];
+      state.selectedItem = state.hashMap.get(payload);
       state.currentIdx = [payload]
     }
   },
@@ -110,8 +113,8 @@ export default createStore({
       });
     },
     deleteGame(context, { payload, toast }) {
-
-      context.commit('SELECT_ITEM', payload.idx);      
+      
+      context.commit('SELECT_ITEM', payload.idx);          
 
       let api_payload;
 
@@ -175,6 +178,7 @@ export default createStore({
 
       axios.delete('http://localhost:4000/remove', { data: api_payload }).then((resp) => {
         if (resp) {
+          // FIX
           context.dispatch('getGames', { payload: { table: payload.table }, toast });
           toast.success(`Success on Remove ${context.state.selectedItem.title} from Database`)
         }
