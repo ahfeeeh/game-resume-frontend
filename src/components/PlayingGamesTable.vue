@@ -23,8 +23,8 @@
         <td>{{game.observation}}</td>
         <td>
           <div class="btn-group btn-group-sm" role="group">              
-              <button type="button" class="btn btn-success btn-sm" @click="finishItem(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;              
-              <button type="button" class="btn btn-secondary btn-sm" @click="deleteItem(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
+              <button type="button" class="btn btn-success btn-sm" @click="finishItem(game.app_id || game.id)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;              
+              <button type="button" class="btn btn-secondary btn-sm" @click="deleteItem(game.app_id || game.id)"><i class="fas fa-trash-alt"></i> Delete</button>
           </div>          
         </td>
       </tr>
@@ -57,11 +57,11 @@ export default {
     getItems(){
       this.store.dispatch('getGames', { payload:{table: 'playing'}, toast: this.toast })
     },
-    finishItem(idx) {                  
-      this.store.dispatch('finishGame', { payload:{idx, table: 'playing'}, toast: this.toast })      
+    finishItem(idx) {                 
+      this.store.dispatch('finishGame', { payload:{idx: idx, table: 'playing'}, toast: this.toast })      
     },
-    deleteItem(idx) {      
-      this.store.dispatch('deleteGame', { payload:{idx, table: 'playing'}, toast: this.toast })        
+    deleteItem(idx) {            
+      this.store.dispatch('deleteGame', { payload:{idx: idx, table: 'playing'}, toast: this.toast })        
     },
   }  
 }
