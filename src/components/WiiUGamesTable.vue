@@ -1,4 +1,5 @@
 <template>
+<!--
   <br />
   <br />
   <br />
@@ -8,7 +9,7 @@
     </div>
     <input type="text" class="form-control" placeholder="Input Game Name" aria-label="Search" aria-describedby="basic-addon1" v-model="searchQuery">
   </div>
-  
+ --> 
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -24,7 +25,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(game, idx) in resultQuery" :key="idx">
+      <tr v-for="(game, idx) in getGames" :key="idx">
         <td>{{ game.id }}</td>
         <td><img :src="`http://localhost:4000/${game.app_id}.jpg`" class="img-fluid img-thumbnail"></td>
         <td>{{ game.app_id }}</td>

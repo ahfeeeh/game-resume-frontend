@@ -1,4 +1,5 @@
 <template>
+<!--  
   <br />
   <br />
   <br />
@@ -8,7 +9,7 @@
     </div>
     <input type="text" class="form-control" placeholder="Input Game Name" aria-label="Search" aria-describedby="basic-addon1" v-model="searchQuery">
   </div>
-
+-->
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -20,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(game, idx) in resultQuery" :key="idx">
+      <tr v-for="(game, idx) in getGames" :key="idx">
         <td>{{ game.id }}</td>
         <td>{{ game.app_id }}</td>
         <td>{{ game.title }}</td>
