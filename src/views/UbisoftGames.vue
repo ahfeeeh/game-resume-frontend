@@ -23,13 +23,7 @@
         <template v-slot:modal-header>
             Add a New Game
         </template>      
-        <template v-slot:modal-content>            
-            <div class="input-group mb-3  input-group-md">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">ID</span>
-                </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.id">
-            </div>
+        <template v-slot:modal-content>                        
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3">AppId</span>

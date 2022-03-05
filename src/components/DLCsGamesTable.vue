@@ -16,12 +16,12 @@
         <td>{{game.app_id}}</td>        
         <td>{{game.system}}</td>        
         <td>{{game.title}}</td>              
-        <td><input type="checkbox" v-model="game.finished" :disabled=true></td>           
+        <td><input type="checkbox" v-model="game.finished" :disabled="true"></td>           
         <td>
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
-            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(game.app_id || game.id)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(game.app_id || game.id)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(game.app_id || game.id)"><i class="fas fa-trash-alt"></i> Delete</button>
           </div>          
         </td>
       </tr>
@@ -36,7 +36,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3" >ID</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.id">
+                <input readonly type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.id">
             </div>
 
             <div class="input-group mb-3  input-group-md">
@@ -159,11 +159,11 @@ export default {
       this.store.dispatch('getGames', { payload:{table: 'dlcs'}, toast: this.toast })
     },
     finishItem(idx, toggleModal) {                  
-      this.store.dispatch('finishGame', { payload:{idx, table: 'dlcs'}, toast: this.toast })
+      this.store.dispatch('finishGame', { payload:{idx:idx[0], table: 'dlcs'}, toast: this.toast })
       toggleModal();   
     },
     deleteItem(idx, toggleModal) {
-      this.store.dispatch('deleteGame', { payload:{idx, table: 'dlcs'}, toast: this.toast })  
+      this.store.dispatch('deleteGame', { payload:{idx:idx[0], table: 'dlcs'}, toast: this.toast })  
       toggleModal();  
     },editItem(payload) {
       payload.table = 'dlcs'
