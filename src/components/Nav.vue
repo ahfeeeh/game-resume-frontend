@@ -38,6 +38,8 @@
               <li><router-link to="/charts" class="dropdown-item">Charts</router-link></li>                 
               <li><hr class="dropdown-divider" /></li>
               <li><router-link to="/genres" class="dropdown-item">Genres</router-link></li>                 
+              <li><hr class="dropdown-divider" /></li>
+              <li><router-link to="/finished_over_system" class="dropdown-item">Finished Stats</router-link></li>                 
             </ul>
           </li>
         

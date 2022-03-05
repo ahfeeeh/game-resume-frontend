@@ -63,6 +63,11 @@ const routes = [
     component: () => import('../views/GenresResume.vue')
   },
   {
+    path: '/finished_over_system',
+    name: 'Finished Over System',
+    component: () => import('../views/FinishedOverSystem.vue')
+  },
+  {
     path: '/gamesbygenres',
     name: 'GamesByGenres',
     component: () => import('../views/GamesByGenres.vue')
