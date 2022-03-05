@@ -1,4 +1,16 @@
 <template>
+
+  <br />
+  <br />
+  <br />
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Search</span>
+    </div>
+    <input type="text" class="form-control" placeholder="Input Game Name" aria-label="Search" aria-describedby="basic-addon1" v-model="searchQuery">
+  </div>
+
+
     <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -13,7 +25,7 @@
       </tr>
     </thead>
     <tbody>  
-      <tr v-for="game, idx in games" :key="idx">
+      <tr v-for="game, idx in resultQuery" :key="idx">
         <td>{{game.id }}</td>
         <td>{{game.app_id }}</td>
         <td>{{game.title}}</td>    
@@ -35,6 +47,7 @@ export default {
   name: 'AllGamesTable',
   data() {
     return {
+      searchQuery: null,
       games: []      
     }
   },
@@ -43,7 +56,18 @@ export default {
       this.games = resp.data.games;      
     });
     
+  },
+  computed: {
+    resultQuery() {
+    if(this.searchQuery){
+      return this.games.filter((item)=>{        
+        return this.searchQuery.toLowerCase().split(' ').every(v => item.title.toLowerCase().includes(v))
+      })
+      }else{
+        return this.games;
+      }
   }  
+}
 }
 </script>
 
