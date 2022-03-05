@@ -12,7 +12,7 @@
                                         <p class="card-text">Games Finished: {{stat.finished_cnt}}</p>
                                         
                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" :class="statusColor(stat.percentual)"
                                                 role="progressbar" :aria-valuenow="stat.percentual" aria-valuemin="0" aria-valuemax="100" :style="{width: `${Math.round(stat.percentual)}%`}">
                                             {{`${Math.round(stat.percentual)}%`}}
                                             </div>
@@ -41,6 +41,26 @@ export default {
     async mounted() {
         const result = await axios.get('http://localhost:4000/statistics?from=finished_over_system');
         this.stats = result.data.result;        
+    },
+    methods: {
+        statusColor(percent) {
+            let clazz;
+            switch (true) {
+                case (percent <= 20):
+                    clazz = 'bg-danger'
+                    break;              
+                case (percent >= 90):
+                    clazz = 'bg-success'
+                    break;                               
+                case (percent <= 50):
+                    clazz = 'bg-warning'
+                    break    
+                default:
+                    clazz = 'bg-info'
+                    break;
+            }
+            return clazz
+        }
     }
 }
 </script>
