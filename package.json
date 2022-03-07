@@ -16,7 +16,7 @@
     "core-js": "^3.6.5",
     "graphql": "^15.7.2",
     "graphql-request": "^3.6.1",
-    "vue": "^3.2.21",
+    "vue": "^3.2.21",    
     "vue-router": "^4.0.0-0",
     "vue-toastification": "^2.0.0-rc.5",
     "vuex": "^4.0.0-0"

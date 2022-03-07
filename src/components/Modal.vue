@@ -105,5 +105,14 @@ export default {
 	color: #fff;*/
 	cursor: pointer;
 }
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 60vh;    
+    overflow-y: auto;
+}
  
 </style>
