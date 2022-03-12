@@ -57,12 +57,25 @@
         </div>
         <input readonly type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.id" />
       </div>
+
       <div class="input-group mb-3 input-group-md">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">AppId</span>
         </div>
         <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.app_id" />
       </div>
+
+
+        <div class="input-group mb-3  input-group-md">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3" >SystemId</span>
+              </div>
+            <input type="text" readonly class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.system_id">
+        </div>
+
+
+
+
       <div class="input-group mb-3 input-group-md">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">Title</span>
@@ -75,6 +88,7 @@
           v-model="getSelectedGame.title"
         />
       </div>
+
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <div class="input-group-text">
@@ -94,24 +108,34 @@
         />
       </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <div class="input-group-text">
-            <input
-              type="checkbox"
-              aria-label="Checkbox for following text input"
-              v-model="getSelectedGame.fisical_disc"
-            />
-          </div>
-        </div>
-        <input
-          type="text"
-          class="form-control"
-          aria-label="Text input with checkbox"
-          readonly
-          placeholder="Fisical Disc?"
-        />
-      </div>
+                  
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="getSelectedGame.collection">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Collection?">
+            </div>
+
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="getSelectedGame.genuine">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Genuine?">
+            </div>
+
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="getSelectedGame.fisical_disc">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Fisical Disc?">
+            </div>
+
     </template>
     <template v-slot:modal-footer>
       <button
