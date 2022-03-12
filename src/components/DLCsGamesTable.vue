@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>  
-      <tr v-for="game, idx in getGames" :key="idx">
+      <tr v-for="game, idx in getGames" :key="idx">        
         <td>{{game.id }}</td>
         <td>{{game.app_id}}</td>        
         <td>{{game.system}}</td>        
@@ -19,9 +19,9 @@
         <td><input type="checkbox" v-model="game.finished" :disabled="true"></td>           
         <td>
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(game.app_id || game.id)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
-            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(game.app_id || game.id)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(game.app_id || game.id)"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(game.id)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(game.id)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(game.id)"><i class="fas fa-trash-alt"></i> Delete</button>
           </div>          
         </td>
       </tr>

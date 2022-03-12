@@ -11,7 +11,17 @@ export default createStore({
   mutations: {
     SAVE_GAMES(state, payload) {
       state.hashMap = new Map()
-      payload.forEach(game=> state.hashMap.set(game.app_id || game.id , game))      
+      
+      let tag;
+      payload.games.forEach(game=> {
+        if(payload.isDLC){
+          tag = game.id;
+        }else {
+          tag = game.app_id ? game.app_id : game.id;
+        }
+        
+        state.hashMap.set(tag , game)
+      })            
       state.games = Array.from(state.hashMap.values());      
     },
     SELECT_ITEM(state, payload) {      
@@ -22,7 +32,8 @@ export default createStore({
   actions: {    
     getGames(context, { payload, toast }) {
       axios.get(`http://localhost:4000/${payload.table}`).then((resp) => {
-        context.commit("SAVE_GAMES", resp.data.games);
+        debugger
+        context.commit("SAVE_GAMES", {games: resp.data.games, isDLC: payload.table === 'dlcs' });        
         toast.success('Data Loaded Successfully', { timeout: 2000 });
       }).catch((rej) => {
         console.error(rej)
