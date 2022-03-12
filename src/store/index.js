@@ -11,28 +11,28 @@ export default createStore({
   mutations: {
     SAVE_GAMES(state, payload) {
       state.hashMap = new Map()
-      
+
       let tag;
-      payload.games.forEach(game=> {
-        if(payload.isDLC){
+      payload.games.forEach(game => {
+        if (payload.isDLC) {
           tag = game.id;
-        }else {
+        } else {
           tag = game.app_id ? game.app_id : game.id;
         }
-        
-        state.hashMap.set(tag , game)
-      })            
-      state.games = Array.from(state.hashMap.values());      
+
+        state.hashMap.set(tag, game)
+      })
+      state.games = Array.from(state.hashMap.values());
     },
-    SELECT_ITEM(state, payload) {      
+    SELECT_ITEM(state, payload) {
       state.selectedItem = state.hashMap.get(payload);
       state.currentIdx = [payload]
     }
   },
-  actions: {    
+  actions: {
     getGames(context, { payload, toast }) {
-      axios.get(`http://localhost:4000/${payload.table}`).then((resp) => {        
-        context.commit("SAVE_GAMES", {games: resp.data.games, isDLC: payload.table === 'dlcs' });        
+      axios.get(`http://localhost:4000/${payload.table}`).then((resp) => {
+        context.commit("SAVE_GAMES", { games: resp.data.games, isDLC: payload.table === 'dlcs' });
         toast.success('Data Loaded Successfully', { timeout: 2000 });
       }).catch((rej) => {
         console.error(rej)
@@ -41,75 +41,17 @@ export default createStore({
     },
     finishGame(context, { payload, toast }) {
 
-      context.commit('SELECT_ITEM', payload.idx);            
+      context.commit('SELECT_ITEM', payload.idx);
 
       let api_payload;
-      if (payload.table === 'wiiu') {
+       
         api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          finished: !context.state.selectedItem.finished
-        }
-      } else if (payload.table === 'wii') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          finished: !context.state.selectedItem.finished
-        }
-      } else if (payload.table === 'gamecube') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          finished: !context.state.selectedItem.finished
-        }
-      } else if (payload.table === 'ubisoft') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          finished: !context.state.selectedItem.finished
-        }
-      } else if (payload.table === 'origin') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          finished: !context.state.selectedItem.finished
-        }
-      } else if (payload.table === 'steam') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
+          id: context.state.selectedItem.id,
           app_id: context.state.selectedItem.app_id,
-          finished: !context.state.selectedItem.finished
-        }
-      } else if (payload.table === 'tobuy') {
-        api_payload = {
-          table: payload.table,
           title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id,
+          table: payload.table,                    
           finished: !context.state.selectedItem.finished
-        }
-      } else if (payload.table === 'virtualconsole') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id,
-          finished: !context.state.selectedItem.finished
-        }
-      } else if (payload.table === 'dlcs') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id,
-          finished: !context.state.selectedItem.finished
-        }
-      } else if (payload.table === 'playing') {                
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id,
-          finished: !context.state.selectedItem.finished          
-        }        
-      }
+        }      
 
       axios.post('http://localhost:4000/finished', api_payload).then((resp) => {
 
@@ -123,8 +65,8 @@ export default createStore({
       });
     },
     deleteGame(context, { payload, toast }) {
-      
-      context.commit('SELECT_ITEM', payload.idx);          
+
+      context.commit('SELECT_ITEM', payload.idx);
 
       let api_payload;
 
@@ -177,7 +119,7 @@ export default createStore({
           title: context.state.selectedItem.title,
           id: context.state.selectedItem.id
         }
-      } else if (payload.table === 'playing') {        
+      } else if (payload.table === 'playing') {
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
@@ -202,50 +144,7 @@ export default createStore({
 
       let api_payload;
 
-      if (payload.table === 'wiiu') {
-        api_payload = {
-          id: payload.id,
-          app_id: payload.app_id,
-          title: payload.title,
-          finished: payload.finished,
-          fisical_disc: payload.fisical_disc,
-          table: payload.table
-        }
-      } else if (payload.table === 'wii') {
-        api_payload = {
-          id: payload.id,
-          app_id: payload.app_id,
-          title: payload.title,
-          finished: payload.finished,
-          fisical_disc: payload['fisical_disc'],
-          table: payload.table
-        }
-      } else if (payload.table === 'gamecube') {
-        api_payload = {
-          id: payload.id,
-          app_id: payload.app_id,
-          title: payload.title,
-          finished: payload.finished,
-          fisical_disc: payload['fisical_disc'],
-          table: payload.table
-        }
-      } else if (payload.table === 'ubisoft') {
-        api_payload = {
-          id: payload.id,
-          app_id: payload.app_id,
-          title: payload.title,
-          finished: payload.finished,
-          table: payload.table
-        }
-      } else if (payload.table === 'origin') {
-        api_payload = {
-          id: payload.id,
-          app_id: payload.app_id,
-          title: payload.title,
-          finished: payload.finished,
-          table: payload.table
-        }
-      } else if (payload.table === 'tobuy') {
+      if (payload.table === 'tobuy') {
         api_payload = {
           id: payload.id,
           title: payload.title,
@@ -275,6 +174,19 @@ export default createStore({
           collection: payload.collection,
           table: payload.table
         }
+      } else {
+        api_payload = {
+          id: payload.id,
+          app_id: payload.app_id,
+          system_id: payload.system_id,
+          title: payload.title,
+          finished: payload.finished,
+          finished_at: payload.finished_at,
+          collection: payload.collection,
+          genuine: payload.genuine,
+          fisical_disc: payload.fisical_disc,
+          table: payload.table
+        }
       }
 
       axios.put('http://localhost:4000/update', api_payload).then((resp) => {
@@ -290,7 +202,7 @@ export default createStore({
 
 
     },
-    saveGame(context, { payload, toast, toggleModal }) {     
+    saveGame(context, { payload, toast, toggleModal }) {
 
       axios.post('http://localhost:4000/create', payload).then((resp) => {
         if (resp) {
@@ -304,9 +216,9 @@ export default createStore({
       })
 
     },
-    markAsPlaying(context, { payload, toast }) {  
-      
-      context.commit('SELECT_ITEM', payload.idx);       
+    markAsPlaying(context, { payload, toast }) {
+
+      context.commit('SELECT_ITEM', payload.idx);
 
       const api_payload = {
         table: payload.table,
@@ -317,7 +229,7 @@ export default createStore({
 
       axios.post('http://localhost:4000/create', api_payload).then((resp) => {
         if (resp) {
-          toast.success(`Success on Mark as Playing ${api_payload.title}`)          
+          toast.success(`Success on Mark as Playing ${api_payload.title}`)
         }
       }).catch((rej) => {
         console.error(rej)
