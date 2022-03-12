@@ -70,63 +70,11 @@ export default createStore({
 
       let api_payload;
 
-      if (payload.table === 'wiiu') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id
-        }
-      } else if (payload.table === 'wii') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id
-        }
-      } else if (payload.table === 'gamecube') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id
-        }
+      api_payload = {
+        table: payload.table,
+        title: context.state.selectedItem.title,
+        id: context.state.selectedItem.id
       }
-      else if (payload.table === 'ubisoft') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id
-        }
-      } else if (payload.table === 'origin') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id
-        }
-      } else if (payload.table === 'tobuy') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id
-        }
-      } else if (payload.table === 'virtualconsole') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id
-        }
-      } else if (payload.table === 'dlcs') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id
-        }
-      } else if (payload.table === 'playing') {
-        api_payload = {
-          table: payload.table,
-          title: context.state.selectedItem.title,
-          id: context.state.selectedItem.id
-        }
-      }
-
 
       axios.delete('http://localhost:4000/remove', { data: api_payload }).then((resp) => {
         if (resp) {
