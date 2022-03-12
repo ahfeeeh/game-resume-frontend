@@ -30,6 +30,15 @@
                 </div>
                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.app_id">
             </div>
+
+            
+            <div class="input-group mb-3  input-group-md">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">SystemId</span>
+                </div>
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.system_id">
+            </div>
+            
             
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
@@ -54,22 +63,7 @@
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Genuine?">
-            </div>
-
-             <div class="input-group mb-3  input-group-md">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Platform</span>
-                </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.platform">
-            </div>
-
-             <div class="input-group mb-3  input-group-md">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">System</span>
-                </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.system">
-            </div>
-
+            </div>             
            
         </template>
         <template v-slot:modal-footer>
@@ -119,13 +113,13 @@ export default {
   data() {
     return {   
       isLoading: true,   
-      newItem: {app_id: "", title: "", finished: null, fisical_disc: null, genuine:null, table: 'virtualconsole'}      
+      newItem: {app_id: "", system_id: null, title: "", finished: null, genuine:null, table: 'virtualconsole'}      
     }
   },
   methods: {
     saveGame(payload) {  
       this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
-      this.newItem = {app_id: "", title: "", finished: null, fisical_disc: null, genuine: null, table: 'virtualconsole'}            
+      this.newItem = {app_id: "", system_id:null, title: "", finished: null, genuine: null, table: 'virtualconsole'}            
     }
   }
 }

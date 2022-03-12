@@ -155,15 +155,13 @@ export default createStore({
         }
       } else if (payload.table === 'virtualconsole') {
         api_payload = {
-          id: payload.id,
+          id: payload.id,          
           app_id: payload.app_id,
+          system_id: payload.system_id,
           title: payload.title,
-          finished: payload.finished,
-          system: payload.system,
-          console: payload.console,
-          table: payload.table,
-          genuine: payload.genuine,
-          platform: payload.platform
+          finished: payload.finished,          
+          genuine: payload.genuine,          
+          table: payload.table
         }
       } else if (payload.table === 'dlcs') {
         api_payload = {

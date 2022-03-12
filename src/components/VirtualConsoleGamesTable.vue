@@ -6,6 +6,7 @@
         <th>AppId</th>        
         <th>Title</th>        
         <th>Finished ?</th>
+        <th>Genuine ?</th>
         <th>Platform</th>
         <th>System</th>
         <th>Actions</th>
@@ -16,7 +17,8 @@
         <td>{{game.id }}</td>
         <td>{{game.app_id}}</td>        
         <td>{{game.title}}</td>              
-        <td><input type="checkbox" v-model="game.finished" :disabled=true></td>   
+        <td><input type="checkbox" v-model="game.finished" :disabled="true"></td>   
+        <td><input type="checkbox" v-model="game.genuine" :disabled="true"></td>   
         <td>{{game.platform}}</td>
         <td>{{game.system}}</td>
         <td>
@@ -49,6 +51,15 @@
                 </div>
                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.app_id">
             </div>
+
+            
+            <div class="input-group mb-3  input-group-md">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" >SystemId</span>
+                </div>
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.system_id">
+            </div>
+
             
             <div class="input-group mb-3  input-group-md">
                 <div class="input-group-prepend">
@@ -74,21 +85,7 @@
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Genuine?">
             </div>
-            
-            <div class="input-group mb-3  input-group-md">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Platform</span>
-                </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.platform">
-            </div>
-            
-            <div class="input-group mb-3  input-group-md">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">System</span>
-                </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="getSelectedGame.system">
-            </div>
-            
+
         </template>
         <template v-slot:modal-footer>
             <button type="button" class="btn btn-primary" @click="editItem(getSelectedGame)">Save changes</button>
