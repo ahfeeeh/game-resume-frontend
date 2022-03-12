@@ -27,6 +27,7 @@
                 </div>
                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" v-model="newItem.title">
             </div>
+            
             <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
@@ -34,6 +35,15 @@
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Finished?">
+            </div>
+
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="newItem.collection">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Collection?">
             </div>
 
         </template>
@@ -83,13 +93,13 @@ export default {
   data() {
     return {      
       isLoading: true, 
-      newItem: {app_id: "", title: "", finished: null, fisical_disc: null, table: 'dlcs'}      
+      newItem: {app_id: "", title: "", finished: null, collection: null, table: 'dlcs'}      
     }
   },
   methods: {
     saveGame(payload) {  
       this.store.dispatch('saveGame', { payload, toast: this.toast, toggleModal: this.toggleModal })  
-      this.newItem = {app_id: "", title: "", finished: null, fisical_disc: null, table: 'dlcs'}            
+      this.newItem = {app_id: "", title: "", finished: null, collection: null, table: 'dlcs'}            
     }
   }
 }

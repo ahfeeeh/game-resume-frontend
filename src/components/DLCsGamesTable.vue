@@ -7,6 +7,7 @@
         <th>System</th> 
         <th>Title</th>        
         <th>Finished ?</th>        
+        <th>Collection ?</th> 
         <th>Actions</th>
       </tr>
     </thead>
@@ -17,6 +18,7 @@
         <td>{{game.system}}</td>        
         <td>{{game.title}}</td>              
         <td><input type="checkbox" v-model="game.finished" :disabled="true"></td>           
+        <td><input type="checkbox" v-model="game.collection" :disabled="true"></td>           
         <td>
           <div class="btn-group btn-group-sm" role="group">
             <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(game.id)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
@@ -60,6 +62,15 @@
                 </div>
             </div>
             <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Finished?">
+            </div>
+
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input" v-model="getSelectedGame.collection">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" readonly placeholder="Collection?">
             </div>
             
         </template>

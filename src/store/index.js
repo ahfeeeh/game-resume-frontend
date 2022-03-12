@@ -31,8 +31,7 @@ export default createStore({
   },
   actions: {    
     getGames(context, { payload, toast }) {
-      axios.get(`http://localhost:4000/${payload.table}`).then((resp) => {
-        debugger
+      axios.get(`http://localhost:4000/${payload.table}`).then((resp) => {        
         context.commit("SAVE_GAMES", {games: resp.data.games, isDLC: payload.table === 'dlcs' });        
         toast.success('Data Loaded Successfully', { timeout: 2000 });
       }).catch((rej) => {
@@ -86,21 +85,21 @@ export default createStore({
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
-          idx: context.state.selectedItem.idx,
+          id: context.state.selectedItem.id,
           finished: !context.state.selectedItem.finished
         }
       } else if (payload.table === 'virtualconsole') {
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
-          idx: context.state.selectedItem.idx,
+          id: context.state.selectedItem.id,
           finished: !context.state.selectedItem.finished
         }
       } else if (payload.table === 'dlcs') {
         api_payload = {
           table: payload.table,
           title: context.state.selectedItem.title,
-          idx: context.state.selectedItem.idx,
+          id: context.state.selectedItem.id,
           finished: !context.state.selectedItem.finished
         }
       } else if (payload.table === 'playing') {                
@@ -273,6 +272,7 @@ export default createStore({
           app_id: payload.app_id,
           title: payload.title,
           finished: payload.finished,
+          collection: payload.collection,
           table: payload.table
         }
       }

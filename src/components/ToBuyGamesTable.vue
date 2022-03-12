@@ -17,9 +17,9 @@
         <td>{{game.system}}</td>
         <td>
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(idx)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
-            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(idx)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
-            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(idx)"><i class="fas fa-trash-alt"></i> Delete</button>  &nbsp;
+            <button type="button" class="btn btn-success btn-sm" @click="toggleModalFinished(game.app_id || game.id)"><i class="fas fa-check"></i> Mark as Finished</button> &nbsp;
+            <button type="button" class="btn btn-primary btn-sm" @click="toggleModal(game.app_id || game.id)"><i class="fas fa-edit"></i> Edit</button> &nbsp;
+            <button type="button" class="btn btn-secondary btn-sm" @click="toggleModalDelete(game.app_id || game.id)"><i class="fas fa-trash-alt"></i> Delete</button>  &nbsp;
             <a v-if="game.magnetic_link" class="btn btn-success btn-sm" :href="game.magnetic_link"><i class="fas fa-download"></i> Download</a>
           </div>          
         </td>
@@ -154,13 +154,12 @@ export default {
     getItems(){
       this.store.dispatch('getGames', { payload:{table: 'tobuy'}, toast: this.toast })
     },
-    finishItem(idx, toggleModal) {    
-      debugger              
-      this.store.dispatch('finishGame', { payload:{idx, table: 'tobuy'}, toast: this.toast })
+    finishItem(idx, toggleModal) {                  
+      this.store.dispatch('finishGame', { payload:{idx: idx[0], table: 'tobuy'}, toast: this.toast })
       toggleModal();   
     },
     deleteItem(idx, toggleModal) {
-      this.store.dispatch('deleteGame', { payload:{idx, table: 'tobuy'}, toast: this.toast })  
+      this.store.dispatch('deleteGame', { payload:{idx: idx[0], table: 'tobuy'}, toast: this.toast })  
       toggleModal();  
     },editItem(payload) {
       payload.table = 'tobuy'
