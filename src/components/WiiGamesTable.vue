@@ -245,7 +245,7 @@ export default {
           }
         `;        
 
-        request("http://localhost:4000/graphql", query).then((data) => {                    
+        request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, query).then((data) => {                    
           context.dlcs = data.dlcs;          
         });
       } else{
@@ -259,7 +259,7 @@ export default {
       console.log("appid:", id)
       console.log("finished: ", finished)
       const api_payload = {app_id: id, id: idx, finished}
-      axios.post('http://localhost:4000/dlc_finished', api_payload)
+      axios.post(`${process.env.VUE_APP_BACKEND_SERVER}/dlc_finished`, api_payload)
         .then(resp=> {          
           context.dlcs = resp.data.dlcs
           toast.success(`Success on Mark as Finished from Database`)

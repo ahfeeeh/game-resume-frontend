@@ -45,17 +45,17 @@ export default {
     },
     methods:{
         async getTrashItems(){
-            const result = await axios.get('http://localhost:4000/trash');
+            const result = await axios.get(`${process.env.VUE_APP_BACKEND_SERVER}/trash`);
             this.trash = result.data.trash;
         },
         async restoreItem(id){
-            const result = await axios.post('http://localhost:4000/restore', {id});
+            const result = await axios.post(`${process.env.VUE_APP_BACKEND_SERVER}/restore`, {id});
             console.log(result)
             this.toast.success(`Success on Restore Item ${id}`);
             this.getTrashItems();
         },
         async deleteItem(id){
-            const result = await axios.delete(`http://localhost:4000/trash?id=${id}`);
+            const result = await axios.delete(`${process.env.VUE_APP_BACKEND_SERVER}/trash?id=${id}`);
             console.log(result)
             this.toast.success(`Success on Delte Item ${id}`);
             this.getTrashItems();

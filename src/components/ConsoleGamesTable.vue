@@ -48,7 +48,7 @@ export default {
     }
   },
   created() {
-    axios.get('http://localhost:4000/console').then((resp) =>{
+    axios.get(`${process.env.VUE_APP_BACKEND_SERVER}/console`).then((resp) =>{
       this.games = resp.data.games;      
     });    
   },

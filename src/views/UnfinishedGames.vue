@@ -149,7 +149,7 @@ export default {
   methods: {
     allUnfinishedGames() {
       const vm = this;
-      request("http://localhost:4000/graphql", queryAllUnfinished).then(
+      request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, queryAllUnfinished).then(
         (data) => {
           vm.games = data.games;
         }
@@ -157,7 +157,7 @@ export default {
     },
     allUnfinishedGamesDetailed() {
       const vm = this;
-      request("http://localhost:4000/graphql", queryAllUnfinishedDetailed).then(
+      request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, queryAllUnfinishedDetailed).then(
         (data) => {
           vm.games = data.games;
         }
@@ -165,7 +165,7 @@ export default {
     },
     allUnfinishedGamesBySystem(system) {
       const vm = this;
-      request("http://localhost:4000/graphql", queryFilterBySystem, {
+      request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, queryFilterBySystem, {
         system,
       }).then((data) => {
         vm.games = data.games;

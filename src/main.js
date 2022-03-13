@@ -8,6 +8,7 @@ import '@fortawesome/fontawesome-free/js/all.js';
 
 
 
+
 import Toast from "vue-toastification";
 
 // Import the CSS or use your own!

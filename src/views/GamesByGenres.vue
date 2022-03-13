@@ -35,7 +35,7 @@ export default {
   },
   created() {
     const vm = this;
-    request("http://localhost:4000/graphql", query).then((data) => {
+    request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, query).then((data) => {
       vm.genres = data.genres;      
     });
   },

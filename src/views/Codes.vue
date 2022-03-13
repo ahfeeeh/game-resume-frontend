@@ -102,18 +102,18 @@ export default {
   },
   methods: {      
       async getGames(){
-         const response = await axios.get(`http://localhost:4000/search?query=${this.query}`);
+         const response = await axios.get(`${process.env.VUE_APP_BACKEND_SERVER}/search?query=${this.query}`);
          this.games = response.data.games;        
       },
       async getGameByAppId(){
         this.id = null;
         this.content = null;
-        const response = await axios.get(`http://localhost:4000/game/${this.app_id}`);          
+        const response = await axios.get(`${process.env.VUE_APP_BACKEND_SERVER}/game/${this.app_id}`);          
         this.game = response.data.game;
         this.game ? await this.getCode(this.app_id) : this.content = null
       },
       async getCode(app_id){
-          const response = await axios.get(`http://localhost:4000/game/${app_id}/codes`);            
+          const response = await axios.get(`${process.env.VUE_APP_BACKEND_SERVER}/game/${app_id}/codes`);            
           
           if (response.data && response.data.code){
             this.id = response.data.code.id;
@@ -122,12 +122,12 @@ export default {
       },
       async createCodeAndTip(){
           if(this.id) {
-            const response = await axios.put('http://localhost:4000/code', {id: this.id, app_id: this.app_id, content: this.content})          
+            const response = await axios.put(`${process.env.VUE_APP_BACKEND_SERVER}/code`, {id: this.id, app_id: this.app_id, content: this.content})          
             this.content = response.data.code.content;
             this.app_id = response.data.code.app_id;
             this.id = response.data.code.id;
           } else {
-            const response = await axios.post('http://localhost:4000/code', {app_id: this.app_id,content: this.content})          
+            const response = await axios.post(`${process.env.VUE_APP_BACKEND_SERVER}/code`, {app_id: this.app_id,content: this.content})          
             this.content = response.data.code.content;
             this.app_id = response.data.code.app_id;
             this.id = response.data.code.id;

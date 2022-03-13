@@ -31,7 +31,7 @@ export default createStore({
   },
   actions: {
     getGames(context, { payload, toast }) {
-      axios.get(`http://localhost:4000/${payload.table}`).then((resp) => {
+      axios.get(`${process.env.VUE_APP_BACKEND_SERVER}/${payload.table}`).then((resp) => {
         context.commit("SAVE_GAMES", { games: resp.data.games, isDLC: payload.table === 'dlcs' });
         toast.success('Data Loaded Successfully', { timeout: 2000 });
       }).catch((rej) => {
@@ -53,7 +53,7 @@ export default createStore({
           finished: !context.state.selectedItem.finished
         }      
 
-      axios.post('http://localhost:4000/finished', api_payload).then((resp) => {
+      axios.post(`${process.env.VUE_APP_BACKEND_SERVER}/finished`, api_payload).then((resp) => {
 
         if (resp) {
           context.dispatch('getGames', { payload: { table: payload.table }, toast });
@@ -76,7 +76,7 @@ export default createStore({
         id: context.state.selectedItem.id
       }
 
-      axios.delete('http://localhost:4000/remove', { data: api_payload }).then((resp) => {
+      axios.delete(`${process.env.VUE_APP_BACKEND_SERVER}/remove`, { data: api_payload }).then((resp) => {
         if (resp) {
           // FIX
           context.dispatch('getGames', { payload: { table: payload.table }, toast });
@@ -135,7 +135,7 @@ export default createStore({
         }
       }
 
-      axios.put('http://localhost:4000/update', api_payload).then((resp) => {
+      axios.put(`${process.env.VUE_APP_BACKEND_SERVER}/update`, api_payload).then((resp) => {
         if (resp) {
           context.dispatch('getGames', { payload: { table: payload.table }, toast });
           toggleModal()
@@ -150,7 +150,7 @@ export default createStore({
     },
     saveGame(context, { payload, toast, toggleModal }) {
 
-      axios.post('http://localhost:4000/create', payload).then((resp) => {
+      axios.post(`${process.env.VUE_APP_BACKEND_SERVER}/create`, payload).then((resp) => {
         if (resp) {
           toast.success(`Success on Create ${payload.title}`)
           context.dispatch('getGames', { payload: { table: payload.table }, toast });
@@ -173,7 +173,7 @@ export default createStore({
         title: context.state.selectedItem.title
       }
 
-      axios.post('http://localhost:4000/create', api_payload).then((resp) => {
+      axios.post(`${process.env.VUE_APP_BACKEND_SERVER}/create`, api_payload).then((resp) => {
         if (resp) {
           toast.success(`Success on Mark as Playing ${api_payload.title}`)
         }

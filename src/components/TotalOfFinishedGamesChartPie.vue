@@ -49,7 +49,7 @@ export default {
     setTimeout(async () => {
       try {
         const api_data = await axios.get(
-          "http://localhost:4000/charts?type=finished_percent"
+          `${process.env.VUE_APP_BACKEND_SERVER}/charts?type=finished_percent`
         );
         this.chartData.data.labels = api_data.data.labels;        
         this.chartData.data.datasets[0].data = api_data.data.values;

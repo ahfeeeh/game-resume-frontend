@@ -51,8 +51,8 @@ export default {
       games: []      
     }
   },
-  created() {
-    axios.get('http://localhost:4000/all').then((resp) =>{
+  created() {    
+    axios.get(`${process.env.VUE_APP_BACKEND_SERVER}/all`).then((resp) =>{
       this.games = resp.data.games;      
     });
     

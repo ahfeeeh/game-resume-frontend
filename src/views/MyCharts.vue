@@ -91,7 +91,7 @@ export default {
   setup() {},
   created() {
     const vm = this;
-    request("http://localhost:4000/graphql", query).then((data) => {
+    request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, query).then((data) => {
       vm.total_chart = data.total_chart;      
       vm.finished_chart = data.finished_chart;
       vm.total_percent_chart = data.total_percent_chart;

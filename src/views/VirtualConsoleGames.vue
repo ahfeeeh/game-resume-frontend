@@ -11,9 +11,9 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col">
-          <a type="button" class="btn btn-outline-primary" href="http://localhost:4000/csv?table=VirtualConsole">to CSV</a> &nbsp;
-          <a type="button" class="btn btn-outline-secondary" href="http://localhost:4000/pdf?from=virtualconsole" target="_blank">to PDF</a> &nbsp;
-          <a type="button" class="btn btn-outline-success" href="http://localhost:4000/xls?from=virtualconsole">to XLS</a>
+          <a type="button" class="btn btn-outline-primary" :href="`${env}/csv?table=VirtualConsole`">to CSV</a> &nbsp;
+          <a type="button" class="btn btn-outline-secondary" :href="`${env}/pdf?from=virtualconsole`" target="_blank">to PDF</a> &nbsp;
+          <a type="button" class="btn btn-outline-success" :href="`${env}/xls?from=virtualconsole`">to XLS</a>
         </div>
       </div>
     <div class="table-responsive">
@@ -112,6 +112,7 @@ export default {
   },
   data() {
     return {   
+      env: process.env.VUE_APP_BACKEND_SERVER,
       isLoading: true,   
       newItem: {app_id: "", system_id: null, title: "", finished: null, genuine:null, table: 'virtualconsole'}      
     }

@@ -39,7 +39,7 @@ export default {
         return {stats: []};
     },
     async mounted() {
-        const result = await axios.get('http://localhost:4000/statistics?from=finished_over_system');
+        const result = await axios.get(`${process.env.VUE_APP_BACKEND_SERVER}/statistics?from=finished_over_system`);
         this.stats = result.data.result;        
     },
     methods: {

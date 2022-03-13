@@ -27,7 +27,7 @@
     <tbody>
       <tr v-for="(game, idx) in resultQuery" :key="idx">
         <td>{{ game.id }}</td>
-        <td><img :src="`http://localhost:4000/${game.app_id}.jpg`" class="img-fluid img-thumbnail"></td>
+        <td><img :src="`${env}/${game.app_id}.jpg`" class="img-fluid img-thumbnail"></td>
         <td>{{ game.app_id }}</td>
         <td>{{ game.title }}</td>
         <td> <input type="checkbox" v-model="game.finished" :disabled="true" /> </td>
@@ -278,7 +278,7 @@ export default {
           }
         `;        
 
-        request("http://localhost:4000/graphql", query).then((data) => {                    
+        request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, query).then((data) => {                    
           context.dlcs = data.dlcs;          
         });
       } else{
@@ -292,7 +292,7 @@ export default {
       console.log("appid:", id)
       console.log("finished: ", finished)
       const api_payload = {app_id: id, id: idx, finished}
-      axios.post('http://localhost:4000/dlc_finished', api_payload)
+      axios.post(`${process.env.VUE_APP_BACKEND_SERVER}/dlc_finished`, api_payload)
         .then(resp=> {          
           context.dlcs = resp.data.dlcs
           toast.success(`Success on Mark as Finished from Database`)
@@ -319,6 +319,7 @@ export default {
   },
   data() {
     return {
+      env: process.env.VUE_APP_BACKEND_SERVER,
       searchQuery: null,
       dlcs: [],
     };

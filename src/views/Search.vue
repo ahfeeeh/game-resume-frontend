@@ -25,7 +25,7 @@ export default {
  methods: {
    searchGames(query) {
 
-     axios.get(`http://localhost:4000/search?query=${query}`).then(data => {
+     axios.get(`${process.env.VUE_APP_BACKEND_SERVER}/search?query=${query}`).then(data => {
         this.games = data.data.games;     
      });     
    }

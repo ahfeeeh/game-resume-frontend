@@ -131,7 +131,7 @@ export default {
   methods: {
     allFinishedGames() {
       const vm = this;
-      request("http://localhost:4000/graphql", queryAllFinished).then(
+      request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, queryAllFinished).then(
         (data) => {
           vm.games = data.games;
         }
@@ -139,7 +139,7 @@ export default {
     },
     allFinishedGamesDetailed() {
       const vm = this;
-      request("http://localhost:4000/graphql", queryAllFinishedDetailed).then(
+      request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, queryAllFinishedDetailed).then(
         (data) => {
           vm.games = data.games;
         }
@@ -147,7 +147,7 @@ export default {
     },
     allFinishedGamesBySystem(system) {
       const vm = this;
-      request("http://localhost:4000/graphql", queryFilterBySystem, {
+      request(`${process.env.VUE_APP_BACKEND_SERVER}/graphql`, queryFilterBySystem, {
         system,
       }).then((data) => {
         vm.games = data.games;

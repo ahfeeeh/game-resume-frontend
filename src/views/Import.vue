@@ -3,7 +3,7 @@
     <div class="import">
       <h1>Import</h1>
 
-      <a href="http://localhost:4000/load_games_empty.xlsx"> Download Import Sheet </a>
+      <a :href="`${process.env.VUE_APP_BACKEND_SERVER}/load_games_empty.xlsx`"> Download Import Sheet </a>
 
       <form @submit.prevent>
       <label for="formFile" class="form-label">Import Games from XLSX</label>
@@ -86,7 +86,7 @@ export default {
       formData.append("sheet", file.files[0]);
 
       axios
-        .post("http://localhost:4000/load_games", formData, {
+        .post(`${process.env.VUE_APP_BACKEND_SERVER}/load_games`, formData, {
           headers: {
             "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
           },
@@ -102,7 +102,7 @@ export default {
 
       axios(
         {
-          url: "http://localhost:4000/load_games", //your url
+          url: `${process.env.VUE_APP_BACKEND_SERVER}/load_games`, //your url
           method: "POST",
           responseType: "blob", // important
           data: formData,
@@ -120,7 +120,7 @@ export default {
       });
     },
     async importData(){
-        const response = await axios.post('http://localhost:4000/import_data', {games: this.games})
+        const response = await axios.post(`${process.env.VUE_APP_BACKEND_SERVER}/import_data`, {games: this.games})
         if (response.data.success) {
             this.toast.success(`Success on import Data to Database`)
             this.file = null;
