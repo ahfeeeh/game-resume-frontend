@@ -3,6 +3,8 @@
     <div class="import">
       <h1>Import</h1>
 
+      <a href="http://localhost:4000/load_games_empty.xlsx"> Download Import Sheet </a>
+
       <form @submit.prevent>
       <label for="formFile" class="form-label">Import Games from XLSX</label>
       <input type="file" name="sheet" id="sheet" class="form-control" accept=".xlsx"/>
@@ -12,7 +14,7 @@
         <a class="btn btn-success" href="#end" v-if="games.length > 20">Go to end</a>
       </p>
       
-    </form>
+    </form>    
     <table class="table table-striped table-hover" v-if="games.length > 0">
       <thead>
         <tr>
