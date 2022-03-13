@@ -3,7 +3,7 @@
     <div class="import">
       <h1>Import</h1>
 
-      <a :href="`${process.env.VUE_APP_BACKEND_SERVER}/load_games_empty.xlsx`"> Download Import Sheet </a>
+      <a :href="`${env}/load_games_empty.xlsx`"> Download Import Sheet </a>
 
       <form @submit.prevent>
       <label for="formFile" class="form-label">Import Games from XLSX</label>
@@ -68,6 +68,7 @@ export default {
   },
   data() {
     return{
+    env: process.env.VUE_APP_BACKEND_SERVER,  
     file: null,
     games: [],
     };
