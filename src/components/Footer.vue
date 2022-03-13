@@ -11,7 +11,7 @@
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
       <li class="nav-item"><router-link to="/trash" class="nav-link px-2 text-muted">Trash</router-link></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><router-link to="/import" class="nav-link px-2 text-muted">Import Data</router-link></li>
       <li class="nav-item"><router-link to="/codes" class="nav-link px-2 text-muted">Codes and Tips</router-link></li>
     </ul>
   </footer>

@@ -128,6 +128,11 @@ const routes = [
     path: '/trash',
     name: 'Trash',
     component: () => import('../views/Trash.vue')
+  },
+  {
+    path: '/import',
+    name: 'Import',
+    component: () => import('../views/Import.vue')
   }
 ]
 
