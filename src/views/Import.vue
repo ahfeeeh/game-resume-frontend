@@ -7,10 +7,10 @@
 
       <form @submit.prevent>
       <label for="formFile" class="form-label">Import Games from XLSX</label>
-      <input type="file" name="sheet" id="sheet" class="form-control" accept=".xlsx"/>
+      <input type="file" name="sheet" id="sheet" class="form-control" accept=".xlsx" v-on:change="changeFile"/>
       <p style="margin-top: 30px;">
-        <button class="btn btn-primary" type="submit" @click="sendFile">Send</button>&nbsp;
-        <button class="btn btn-secondary" type="submit" variant="success" @click="sendFileAndDownload">Send And Download</button>&nbsp;
+        <button class="btn btn-primary" type="submit" @click="sendFile" v-if="!pristine">Send</button>&nbsp;
+        <button class="btn btn-secondary" type="submit" variant="success" @click="sendFileAndDownload" v-if="!pristine">Send And Download</button>&nbsp;
         <a class="btn btn-success" href="#end" v-if="games.length > 20">Go to end</a>
       </p>
       
@@ -71,13 +71,18 @@ export default {
     env: process.env.VUE_APP_BACKEND_SERVER,  
     file: null,
     games: [],
+    pristine: true
     };
   },
   async created(){
       
   },
   methods: {    
-      cancel()  {
+      changeFile(target){
+        console.log(target)
+        this.pristine = false;
+      },
+      cancel()  {        
           this.file = null;
           this.games = []
       },
