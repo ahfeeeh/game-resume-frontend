@@ -4,7 +4,7 @@ const path = require('path')
 const basicAuth = require('express-basic-auth')
 
 const app = express()
-
+/*
 app.use(basicAuth({
     authorizer: (username, password, cb) => {
         const userMatches = basicAuth.safeCompare(username, 'admin')
@@ -16,7 +16,7 @@ app.use(basicAuth({
     },
     authorizeAsync: true,
     challenge: true,
-}))
+}))*/
 
 //here we are configuring dist to serve app files
 app.use('/', serveStatic(path.join(__dirname, '/dist')))
